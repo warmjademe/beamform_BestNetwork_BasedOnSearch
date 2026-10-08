@@ -1,0 +1,60 @@
+{
+  "checkpoint_sha256": "c6b78ba24c8f3e6ac251aa2d1237fa08af2bb43129dca05751d610b4c7626f35",
+  "strict_checkpoint_hashes": {
+    "3": "8e915b84469560dc96f24a1457c5b807f1d1c8655387af09eb4162b3cc749396",
+    "4": "9d589e00245bea41c0aca64f334b8b973b5a38689b716b625b979d81f0b8b720",
+    "5": "c18ec41e45fa99b3d88cd6b64cc19e72df0c62a7b555655963cc6a580e701fb6",
+    "6": "18ff81b310c3d8fd2018c58377f4c5bad14913dbe6f032a4935fa352410c2e48",
+    "7": "02d0e15f5d1bfc7bf4919248f621ba7c2aac204edbcabcbfe412aecf2c1ece5e",
+    "8": "398b3b8866836bda70aa705bfd71ea6588a366c0552db7c316cef4b4eea948cb"
+  },
+  "source_hashes": {
+    "benchmark_ch3_full_test_runtime.py": "4a4180f19a0dd938fe272fecb06c72d000d56d42f879d2d583aaaf4a26b011bc",
+    "beamnas/gpu_runtime.py": "820428ae740e8435ecc99c90df23fee9cc37c7b48b87620a690cf5163ec983d0",
+    "configs/ch3_gpu_deployment_v1.json": "e2a078f61bb74a512a35097c3f38ffe5e520222be50e8bf64a232c7db8b95b32",
+    "beamnas/dense_search.py": "ac756167d0df1be268e46f7d7f61b5a60c5d3aaa41d80295712de40e8f80d300",
+    "beamnas/original_modules.py": "5aa47bb943402ade87441f76a21222c11cbeaf50d7cdfe6abe49fab654666e53",
+    "beamnas/strict_dnnabf.py": "381a0d9477a3daa34fb13b40efa9feed55b5d636e05f4b6ecd1832ff4fe486b9",
+    "beamnas/refined.py": "4182d27a16fa8f7b2fe74661fdbf14699ce542ece0324a9db55265a4642c67d8",
+    "beamnas/pointing.py": "e99d358034366a40a708cb0fb7d507658fd21d1c6b0e72b9189942d577fb0eaf",
+    "beamnas/pointing_boundary.py": "d3752796e5e0f0134bcca01b0e9b1ee95198beb5b4095284c5f1c32621837a48"
+  },
+  "config": {
+    "scope": "Execution-only optimization of the frozen v11 candidate; no training, new architecture or test-based model selection",
+    "checkpoint": "runs/ch3_grid_v11/candidate/retrain/best.pt",
+    "checkpoint_sha256": "c6b78ba24c8f3e6ac251aa2d1237fa08af2bb43129dca05751d610b4c7626f35",
+    "development_data": "data/ch3_grid_good_v11/selection_validation.npz",
+    "test_data": "data/ch3_grid_good_v11/test.npz",
+    "batch_size": 1,
+    "precision": "FP32 neural core, FP64 phases/covariance/MVDR; no TF32 or quantization",
+    "development": {
+      "scenes_per_k": 10,
+      "passes": 10,
+      "warmup": 50,
+      "seed": 2026100901
+    },
+    "confirmation": {
+      "all_test_scenes": 12000,
+      "rounds": 5,
+      "warmup": 100,
+      "seed": 2026100902
+    },
+    "parity": {
+      "network_max_abs_weight_difference": 2e-06,
+      "mvdr_max_abs_weight_difference": 1e-09,
+      "max_abs_sinr_difference_db": 0.001,
+      "max_abs_main_error_difference_deg": 0.1000001
+    },
+    "primary_timing": "User-requested total time for all 12000 test scenes processed sequentially at batch size 1, divided by 12000. CUDA synchronize at whole-loop boundaries. Includes fresh graph input copies and storage of every output weight; GPU inputs resident.",
+    "supplemental_timing": "Same AOA/mask provided on CPU and complex weights returned to CPU, including transfers",
+    "primary_comparison": "Latest user instruction: optimize our network; standard MVDR closed-form covariance/solve/normalize and standard original-form DNNABF forward are primary references. Report implementation asymmetry explicitly.",
+    "supplemental_comparison": "Previously tested graph solve_ex, graph Cholesky, graph inverse and compiled graph MVDR are retained as supplemental optimized references. No deliberate slowing or recomputation of irrelevant work in standard references.",
+    "setup": "Graph capture/compilation and model loading excluded from steady-state latency, recorded separately",
+    "test_role": "Existing 12000-scene holdout is reused only for deployment numerical/metric regression after implementation selection on development data"
+  },
+  "setup": {
+    "NN_compile_and_capture_seconds": 2.65781513415277,
+    "MVDR_supplement_compile_and_capture_seconds": 0.28831747733056545
+  },
+  "selection": "NN compiled graph and fastest development MVDR compiled solve; standard references as primary"
+}

@@ -1,0 +1,9 @@
+{
+  "python": "3.11.16",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "pid": 497674,
+  "cpu_threads": 4,
+  "tf32": false
+}

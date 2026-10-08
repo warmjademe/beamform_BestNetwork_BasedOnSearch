@@ -1,0 +1,55 @@
+{
+  "depth": 8,
+  "layers": [
+    {
+      "ff": 2,
+      "long_skip": "none",
+      "activation": "silu",
+      "skip": "identity"
+    },
+    {
+      "ff": 1,
+      "long_skip": "input",
+      "activation": "tanh",
+      "skip": "linear"
+    },
+    {
+      "ff": 2,
+      "long_skip": "none",
+      "activation": "silu",
+      "skip": "identity"
+    },
+    {
+      "ff": 1,
+      "long_skip": "input",
+      "activation": "silu",
+      "skip": "identity"
+    },
+    {
+      "ff": 2,
+      "long_skip": "input",
+      "activation": "tanh",
+      "skip": "linear"
+    },
+    {
+      "ff": 1,
+      "long_skip": "none",
+      "activation": "gelu",
+      "skip": "linear"
+    },
+    {
+      "ff": 2,
+      "long_skip": "input",
+      "activation": "silu",
+      "skip": "identity"
+    },
+    {
+      "ff": 4,
+      "long_skip": "two_back",
+      "activation": "silu",
+      "skip": "identity"
+    }
+  ],
+  "selection": "one_random_draw_before_training",
+  "architecture_seed": 9117
+}

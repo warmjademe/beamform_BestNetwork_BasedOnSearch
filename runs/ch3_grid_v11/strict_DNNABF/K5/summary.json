@@ -1,0 +1,12 @@
+{
+  "scope": "development_selection_validation_only",
+  "best_mse": 0.0003696083149407059,
+  "best_epoch": 293,
+  "epochs": 320,
+  "steps": 6400,
+  "parameters": 4241432,
+  "training_seconds": 18.76239436864853,
+  "checkpoint_sha256": "c18ec41e45fa99b3d88cd6b64cc19e72df0c62a7b555655963cc6a580e701fb6",
+  "peak_allocated_gpu_bytes": 260211200,
+  "from_scratch": true
+}

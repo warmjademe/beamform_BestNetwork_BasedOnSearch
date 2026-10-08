@@ -1,0 +1,660 @@
+{
+  "complete": true,
+  "scope": "execution optimization of frozen weights; not new training or architecture search",
+  "samples": 12000,
+  "batch_size": 1,
+  "freeze": {
+    "checkpoint_sha256": "c6b78ba24c8f3e6ac251aa2d1237fa08af2bb43129dca05751d610b4c7626f35",
+    "strict_checkpoint_hashes": {
+      "3": "8e915b84469560dc96f24a1457c5b807f1d1c8655387af09eb4162b3cc749396",
+      "4": "9d589e00245bea41c0aca64f334b8b973b5a38689b716b625b979d81f0b8b720",
+      "5": "c18ec41e45fa99b3d88cd6b64cc19e72df0c62a7b555655963cc6a580e701fb6",
+      "6": "18ff81b310c3d8fd2018c58377f4c5bad14913dbe6f032a4935fa352410c2e48",
+      "7": "02d0e15f5d1bfc7bf4919248f621ba7c2aac204edbcabcbfe412aecf2c1ece5e",
+      "8": "398b3b8866836bda70aa705bfd71ea6588a366c0552db7c316cef4b4eea948cb"
+    },
+    "source_hashes": {
+      "benchmark_ch3_full_test_runtime.py": "4a4180f19a0dd938fe272fecb06c72d000d56d42f879d2d583aaaf4a26b011bc",
+      "beamnas/gpu_runtime.py": "820428ae740e8435ecc99c90df23fee9cc37c7b48b87620a690cf5163ec983d0",
+      "configs/ch3_gpu_deployment_v1.json": "e2a078f61bb74a512a35097c3f38ffe5e520222be50e8bf64a232c7db8b95b32",
+      "beamnas/dense_search.py": "ac756167d0df1be268e46f7d7f61b5a60c5d3aaa41d80295712de40e8f80d300",
+      "beamnas/original_modules.py": "5aa47bb943402ade87441f76a21222c11cbeaf50d7cdfe6abe49fab654666e53",
+      "beamnas/strict_dnnabf.py": "381a0d9477a3daa34fb13b40efa9feed55b5d636e05f4b6ecd1832ff4fe486b9",
+      "beamnas/refined.py": "4182d27a16fa8f7b2fe74661fdbf14699ce542ece0324a9db55265a4642c67d8",
+      "beamnas/pointing.py": "e99d358034366a40a708cb0fb7d507658fd21d1c6b0e72b9189942d577fb0eaf",
+      "beamnas/pointing_boundary.py": "d3752796e5e0f0134bcca01b0e9b1ee95198beb5b4095284c5f1c32621837a48"
+    },
+    "config": {
+      "scope": "Execution-only optimization of the frozen v11 candidate; no training, new architecture or test-based model selection",
+      "checkpoint": "runs/ch3_grid_v11/candidate/retrain/best.pt",
+      "checkpoint_sha256": "c6b78ba24c8f3e6ac251aa2d1237fa08af2bb43129dca05751d610b4c7626f35",
+      "development_data": "data/ch3_grid_good_v11/selection_validation.npz",
+      "test_data": "data/ch3_grid_good_v11/test.npz",
+      "batch_size": 1,
+      "precision": "FP32 neural core, FP64 phases/covariance/MVDR; no TF32 or quantization",
+      "development": {
+        "scenes_per_k": 10,
+        "passes": 10,
+        "warmup": 50,
+        "seed": 2026100901
+      },
+      "confirmation": {
+        "all_test_scenes": 12000,
+        "rounds": 5,
+        "warmup": 100,
+        "seed": 2026100902
+      },
+      "parity": {
+        "network_max_abs_weight_difference": 2e-06,
+        "mvdr_max_abs_weight_difference": 1e-09,
+        "max_abs_sinr_difference_db": 0.001,
+        "max_abs_main_error_difference_deg": 0.1000001
+      },
+      "primary_timing": "User-requested total time for all 12000 test scenes processed sequentially at batch size 1, divided by 12000. CUDA synchronize at whole-loop boundaries. Includes fresh graph input copies and storage of every output weight; GPU inputs resident.",
+      "supplemental_timing": "Same AOA/mask provided on CPU and complex weights returned to CPU, including transfers",
+      "primary_comparison": "Latest user instruction: optimize our network; standard MVDR closed-form covariance/solve/normalize and standard original-form DNNABF forward are primary references. Report implementation asymmetry explicitly.",
+      "supplemental_comparison": "Previously tested graph solve_ex, graph Cholesky, graph inverse and compiled graph MVDR are retained as supplemental optimized references. No deliberate slowing or recomputation of irrelevant work in standard references.",
+      "setup": "Graph capture/compilation and model loading excluded from steady-state latency, recorded separately",
+      "test_role": "Existing 12000-scene holdout is reused only for deployment numerical/metric regression after implementation selection on development data"
+    },
+    "setup": {
+      "NN_compile_and_capture_seconds": 2.65781513415277,
+      "MVDR_supplement_compile_and_capture_seconds": 0.28831747733056545
+    },
+    "selection": "NN compiled graph and fastest development MVDR compiled solve; standard references as primary"
+  },
+  "test_sha256": "a7050d7e2dc4c884e555fb0c36966130354984f61bf926791d637e255dfb92c9",
+  "environment": {
+    "torch": "2.8.0+cu128",
+    "cuda": "12.8",
+    "GPU": "NVIDIA GeForce RTX 4090",
+    "platform": "Linux-6.17.0-41-generic-x86_64-with-glibc2.42",
+    "threads": 4,
+    "TF32": false
+  },
+  "timing": {
+    "CPU_input_GPU_compute_CPU_output": {
+      "ours_optimized": {
+        "total_seconds": {
+          "mean": 0.9073795530000001,
+          "std": 0.0012437567396750221,
+          "min": 0.905955426,
+          "max": 0.908252326,
+          "rounds": 3
+        },
+        "per_sample_ms": {
+          "mean": 0.07561496275,
+          "std": 0.00010364639497292056,
+          "min": 0.0754962855,
+          "max": 0.07568769383333333,
+          "rounds": 3
+        }
+      },
+      "MVDR_standard": {
+        "total_seconds": {
+          "mean": 5.636356378666666,
+          "std": 0.016407051431439067,
+          "min": 5.625956146,
+          "max": 5.655270273,
+          "rounds": 3
+        },
+        "per_sample_ms": {
+          "mean": 0.46969636488888894,
+          "std": 0.00136725428595325,
+          "min": 0.4688296788333334,
+          "max": 0.47127252275000003,
+          "rounds": 3
+        }
+      },
+      "DNNABF_standard": {
+        "total_seconds": {
+          "mean": 3.0007884036666668,
+          "std": 0.018918098146885824,
+          "min": 2.979772987,
+          "max": 3.016459312,
+          "rounds": 3
+        },
+        "per_sample_ms": {
+          "mean": 0.2500657003055556,
+          "std": 0.0015765081789071828,
+          "min": 0.2483144155833333,
+          "max": 0.25137160933333336,
+          "rounds": 3
+        }
+      }
+    },
+    "GPU_resident_whole_test": {
+      "ours_standard": {
+        "total_seconds": {
+          "mean": 11.8509977636,
+          "std": 0.047627705154304756,
+          "min": 11.783905206,
+          "max": 11.902217105,
+          "rounds": 5
+        },
+        "per_sample_ms": {
+          "mean": 0.9875831469666666,
+          "std": 0.003968975429525396,
+          "min": 0.9819921005,
+          "max": 0.9918514254166666,
+          "rounds": 5
+        }
+      },
+      "ours_optimized": {
+        "total_seconds": {
+          "mean": 0.5867737622,
+          "std": 0.006618003950281376,
+          "min": 0.576787628,
+          "max": 0.5953402,
+          "rounds": 5
+        },
+        "per_sample_ms": {
+          "mean": 0.048897813516666666,
+          "std": 0.0005515003291901145,
+          "min": 0.04806563566666667,
+          "max": 0.04961168333333333,
+          "rounds": 5
+        }
+      },
+      "MVDR_standard": {
+        "total_seconds": {
+          "mean": 5.5229981878,
+          "std": 0.10717331225270457,
+          "min": 5.462151518,
+          "max": 5.712371334,
+          "rounds": 5
+        },
+        "per_sample_ms": {
+          "mean": 0.4602498489833334,
+          "std": 0.008931109354392064,
+          "min": 0.45517929316666667,
+          "max": 0.47603094450000005,
+          "rounds": 5
+        }
+      },
+      "MVDR_optimized_supplement": {
+        "total_seconds": {
+          "mean": 0.9434650332000001,
+          "std": 0.0060865969336921,
+          "min": 0.935874799,
+          "max": 0.952664387,
+          "rounds": 5
+        },
+        "per_sample_ms": {
+          "mean": 0.0786220861,
+          "std": 0.0005072164111410077,
+          "min": 0.07798956658333334,
+          "max": 0.07938869891666667,
+          "rounds": 5
+        }
+      },
+      "DNNABF_standard": {
+        "total_seconds": {
+          "mean": 2.8301610114,
+          "std": 0.059787325134632224,
+          "min": 2.797291469,
+          "max": 2.936816936,
+          "rounds": 5
+        },
+        "per_sample_ms": {
+          "mean": 0.23584675095000002,
+          "std": 0.004982277094552679,
+          "min": 0.2331076224166667,
+          "max": 0.24473474466666667,
+          "rounds": 5
+        }
+      }
+    }
+  },
+  "speedup_vs_ours_optimized": {
+    "ours_standard": 20.196877445860686,
+    "MVDR_standard": 9.412483215153548,
+    "MVDR_optimized_supplement": 1.607885515641756,
+    "DNNABF_standard": 4.823257605774384
+  },
+  "observations": [
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_optimized",
+      "repeat": 0,
+      "total_seconds": 0.587806738,
+      "samples": 12000,
+      "mean_ms": 0.04898389483333333
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_standard",
+      "repeat": 0,
+      "total_seconds": 5.712371334,
+      "samples": 12000,
+      "mean_ms": 0.47603094450000005
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "DNNABF_standard",
+      "repeat": 0,
+      "total_seconds": 2.936816936,
+      "samples": 12000,
+      "mean_ms": 0.24473474466666667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_optimized_supplement",
+      "repeat": 0,
+      "total_seconds": 0.952664387,
+      "samples": 12000,
+      "mean_ms": 0.07938869891666667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_standard",
+      "repeat": 0,
+      "total_seconds": 11.890233308,
+      "samples": 12000,
+      "mean_ms": 0.9908527756666666
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_standard",
+      "repeat": 1,
+      "total_seconds": 11.902217105,
+      "samples": 12000,
+      "mean_ms": 0.9918514254166666
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_standard",
+      "repeat": 1,
+      "total_seconds": 5.504187147,
+      "samples": 12000,
+      "mean_ms": 0.45868226225
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_optimized_supplement",
+      "repeat": 1,
+      "total_seconds": 0.941149251,
+      "samples": 12000,
+      "mean_ms": 0.07842910425
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_optimized",
+      "repeat": 1,
+      "total_seconds": 0.576787628,
+      "samples": 12000,
+      "mean_ms": 0.04806563566666667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "DNNABF_standard",
+      "repeat": 1,
+      "total_seconds": 2.804937699,
+      "samples": 12000,
+      "mean_ms": 0.23374480825000002
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_standard",
+      "repeat": 2,
+      "total_seconds": 11.831057246,
+      "samples": 12000,
+      "mean_ms": 0.9859214371666667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_optimized",
+      "repeat": 2,
+      "total_seconds": 0.5953402,
+      "samples": 12000,
+      "mean_ms": 0.04961168333333333
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "DNNABF_standard",
+      "repeat": 2,
+      "total_seconds": 2.809540252,
+      "samples": 12000,
+      "mean_ms": 0.23412835433333334
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_standard",
+      "repeat": 2,
+      "total_seconds": 5.466220047,
+      "samples": 12000,
+      "mean_ms": 0.45551833724999996
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_optimized_supplement",
+      "repeat": 2,
+      "total_seconds": 0.943409494,
+      "samples": 12000,
+      "mean_ms": 0.07861745783333333
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "DNNABF_standard",
+      "repeat": 3,
+      "total_seconds": 2.797291469,
+      "samples": 12000,
+      "mean_ms": 0.2331076224166667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_optimized",
+      "repeat": 3,
+      "total_seconds": 0.586280334,
+      "samples": 12000,
+      "mean_ms": 0.048856694500000006
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_optimized_supplement",
+      "repeat": 3,
+      "total_seconds": 0.935874799,
+      "samples": 12000,
+      "mean_ms": 0.07798956658333334
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_standard",
+      "repeat": 3,
+      "total_seconds": 5.462151518,
+      "samples": 12000,
+      "mean_ms": 0.45517929316666667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_standard",
+      "repeat": 3,
+      "total_seconds": 11.847575953,
+      "samples": 12000,
+      "mean_ms": 0.9872979960833334
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_standard",
+      "repeat": 4,
+      "total_seconds": 5.470060893,
+      "samples": 12000,
+      "mean_ms": 0.45583840775000006
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_optimized_supplement",
+      "repeat": 4,
+      "total_seconds": 0.944227235,
+      "samples": 12000,
+      "mean_ms": 0.07868560291666667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_standard",
+      "repeat": 4,
+      "total_seconds": 11.783905206,
+      "samples": 12000,
+      "mean_ms": 0.9819921005
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_optimized",
+      "repeat": 4,
+      "total_seconds": 0.587653911,
+      "samples": 12000,
+      "mean_ms": 0.04897115925
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "DNNABF_standard",
+      "repeat": 4,
+      "total_seconds": 2.802218701,
+      "samples": 12000,
+      "mean_ms": 0.23351822508333336
+    },
+    {
+      "scope": "CPU_input_GPU_compute_CPU_output",
+      "method": "ours_optimized",
+      "repeat": 0,
+      "total_seconds": 0.905955426,
+      "samples": 12000,
+      "mean_ms": 0.0754962855
+    },
+    {
+      "scope": "CPU_input_GPU_compute_CPU_output",
+      "method": "MVDR_standard",
+      "repeat": 0,
+      "total_seconds": 5.627842717,
+      "samples": 12000,
+      "mean_ms": 0.46898689308333336
+    },
+    {
+      "scope": "CPU_input_GPU_compute_CPU_output",
+      "method": "DNNABF_standard",
+      "repeat": 0,
+      "total_seconds": 3.006132912,
+      "samples": 12000,
+      "mean_ms": 0.250511076
+    },
+    {
+      "scope": "CPU_input_GPU_compute_CPU_output",
+      "method": "MVDR_standard",
+      "repeat": 1,
+      "total_seconds": 5.625956146,
+      "samples": 12000,
+      "mean_ms": 0.4688296788333334
+    },
+    {
+      "scope": "CPU_input_GPU_compute_CPU_output",
+      "method": "DNNABF_standard",
+      "repeat": 1,
+      "total_seconds": 2.979772987,
+      "samples": 12000,
+      "mean_ms": 0.2483144155833333
+    },
+    {
+      "scope": "CPU_input_GPU_compute_CPU_output",
+      "method": "ours_optimized",
+      "repeat": 1,
+      "total_seconds": 0.908252326,
+      "samples": 12000,
+      "mean_ms": 0.07568769383333333
+    },
+    {
+      "scope": "CPU_input_GPU_compute_CPU_output",
+      "method": "ours_optimized",
+      "repeat": 2,
+      "total_seconds": 0.907930907,
+      "samples": 12000,
+      "mean_ms": 0.07566090891666667
+    },
+    {
+      "scope": "CPU_input_GPU_compute_CPU_output",
+      "method": "MVDR_standard",
+      "repeat": 2,
+      "total_seconds": 5.655270273,
+      "samples": 12000,
+      "mean_ms": 0.47127252275000003
+    },
+    {
+      "scope": "CPU_input_GPU_compute_CPU_output",
+      "method": "DNNABF_standard",
+      "repeat": 2,
+      "total_seconds": 3.016459312,
+      "samples": 12000,
+      "mean_ms": 0.25137160933333336
+    }
+  ],
+  "metrics": {
+    "ours_standard": {
+      "mean_sinr_db": 20.19678728081679,
+      "main_mae_deg": 0.21821666666666661,
+      "by_k": {
+        "3": {
+          "mean_sinr_db": 20.639597996533517,
+          "main_mae_deg": 0.16194999999999984
+        },
+        "4": {
+          "mean_sinr_db": 20.521605515181886,
+          "main_mae_deg": 0.18450000000000016
+        },
+        "5": {
+          "mean_sinr_db": 20.445111531011165,
+          "main_mae_deg": 0.20944999999999994
+        },
+        "6": {
+          "mean_sinr_db": 20.26448482259462,
+          "main_mae_deg": 0.22510000000000005
+        },
+        "7": {
+          "mean_sinr_db": 19.976830785512618,
+          "main_mae_deg": 0.24764999999999993
+        },
+        "8": {
+          "mean_sinr_db": 19.333093034066923,
+          "main_mae_deg": 0.28064999999999996
+        }
+      }
+    },
+    "ours_optimized": {
+      "mean_sinr_db": 20.196787262195194,
+      "main_mae_deg": 0.21821666666666661,
+      "by_k": {
+        "3": {
+          "mean_sinr_db": 20.6395979512981,
+          "main_mae_deg": 0.16194999999999984
+        },
+        "4": {
+          "mean_sinr_db": 20.52160549118881,
+          "main_mae_deg": 0.18450000000000016
+        },
+        "5": {
+          "mean_sinr_db": 20.445111562686638,
+          "main_mae_deg": 0.20944999999999994
+        },
+        "6": {
+          "mean_sinr_db": 20.264484823005695,
+          "main_mae_deg": 0.22510000000000005
+        },
+        "7": {
+          "mean_sinr_db": 19.976830836777182,
+          "main_mae_deg": 0.24764999999999993
+        },
+        "8": {
+          "mean_sinr_db": 19.333092908214727,
+          "main_mae_deg": 0.28064999999999996
+        }
+      }
+    },
+    "MVDR_standard": {
+      "mean_sinr_db": 20.39912792904411,
+      "main_mae_deg": 0.21820833333333328,
+      "by_k": {
+        "3": {
+          "mean_sinr_db": 20.651396761464937,
+          "main_mae_deg": 0.16449999999999979
+        },
+        "4": {
+          "mean_sinr_db": 20.55800864342681,
+          "main_mae_deg": 0.1909500000000003
+        },
+        "5": {
+          "mean_sinr_db": 20.50786881178018,
+          "main_mae_deg": 0.21509999999999987
+        },
+        "6": {
+          "mean_sinr_db": 20.39725894958173,
+          "main_mae_deg": 0.23135
+        },
+        "7": {
+          "mean_sinr_db": 20.256838199459104,
+          "main_mae_deg": 0.24724999999999994
+        },
+        "8": {
+          "mean_sinr_db": 20.023396208551876,
+          "main_mae_deg": 0.26009999999999994
+        }
+      }
+    },
+    "MVDR_optimized_supplement": {
+      "mean_sinr_db": 20.39912792904411,
+      "main_mae_deg": 0.21820833333333328,
+      "by_k": {
+        "3": {
+          "mean_sinr_db": 20.651396761464937,
+          "main_mae_deg": 0.16449999999999979
+        },
+        "4": {
+          "mean_sinr_db": 20.55800864342681,
+          "main_mae_deg": 0.1909500000000003
+        },
+        "5": {
+          "mean_sinr_db": 20.50786881178018,
+          "main_mae_deg": 0.21509999999999987
+        },
+        "6": {
+          "mean_sinr_db": 20.39725894958173,
+          "main_mae_deg": 0.23135
+        },
+        "7": {
+          "mean_sinr_db": 20.256838199459104,
+          "main_mae_deg": 0.24724999999999994
+        },
+        "8": {
+          "mean_sinr_db": 20.023396208551876,
+          "main_mae_deg": 0.26009999999999994
+        }
+      }
+    },
+    "DNNABF_standard": {
+      "mean_sinr_db": -2.6278329032184353,
+      "main_mae_deg": 0.3505750000000033,
+      "by_k": {
+        "3": {
+          "mean_sinr_db": 1.3741263126943042,
+          "main_mae_deg": 0.3144000000000043
+        },
+        "4": {
+          "mean_sinr_db": -0.9154162941175432,
+          "main_mae_deg": 0.33640000000000375
+        },
+        "5": {
+          "mean_sinr_db": -2.4322771937706196,
+          "main_mae_deg": 0.35445000000000365
+        },
+        "6": {
+          "mean_sinr_db": -3.5388079222814355,
+          "main_mae_deg": 0.3428500000000031
+        },
+        "7": {
+          "mean_sinr_db": -4.436820698292339,
+          "main_mae_deg": 0.34560000000000285
+        },
+        "8": {
+          "mean_sinr_db": -5.817801623542978,
+          "main_mae_deg": 0.4097500000000027
+        }
+      }
+    }
+  },
+  "parity": {
+    "ours_optimized": {
+      "max_abs_weight_difference": 1.0745380151148104e-07,
+      "max_abs_sinr_difference_db": 3.9345677166569004e-05,
+      "max_abs_main_error_difference_deg": 0.0
+    },
+    "MVDR_optimized_supplement": {
+      "max_abs_weight_difference": 0.0,
+      "max_abs_sinr_difference_db": 0.0,
+      "max_abs_main_error_difference_deg": 0.0
+    }
+  },
+  "interpretation": "Primary comparison optimizes ours and retains standard reference implementations by user instruction. Optimized MVDR is supplemental. Whole-set time/N is amortized sequential batch-one latency, not the same as isolated-call latency or batch inference.",
+  "limitations": [
+    "DNNABF checkpoint reconstructs the original network form; its accuracy is not a reproduction of the published numerical results.",
+    "Inputs are known AOA and fixed powers; no signal acquisition or AOA estimation is included.",
+    "Compilation/capture/model loading is a one-time setup excluded from steady-state totals.",
+    "Existing test set used for deployment regression only; no new independent generalization claim."
+  ]
+}

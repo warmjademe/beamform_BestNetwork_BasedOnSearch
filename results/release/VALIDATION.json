@@ -1,0 +1,54 @@
+{
+  "pass": true,
+  "device": "cuda",
+  "splits": {
+    "train": {
+      "samples": 60000,
+      "SHA256_verified": true
+    },
+    "architecture_validation": {
+      "samples": 12000,
+      "SHA256_verified": true
+    },
+    "selection_validation": {
+      "samples": 6000,
+      "SHA256_verified": true
+    },
+    "test": {
+      "samples": 12000,
+      "SHA256_verified": true
+    }
+  },
+  "audit_batches": 62,
+  "desired_angle_group_overlap": 0,
+  "model_checkpoints_verified": true,
+  "models": {
+    "candidate": {
+      "test_scenes": 12000,
+      "max_abs_weight_difference": 0.0,
+      "mean_sinr_db": 20.19678715767859
+    },
+    "fixed": {
+      "test_scenes": 12000,
+      "max_abs_weight_difference": 0.0,
+      "mean_sinr_db": 18.91185959182507
+    },
+    "mse": {
+      "test_scenes": 12000,
+      "max_abs_weight_difference": 0.0,
+      "mean_sinr_db": 18.62214306072365
+    },
+    "random": {
+      "test_scenes": 12000,
+      "max_abs_weight_difference": 0.0,
+      "mean_sinr_db": 20.23899405824836
+    },
+    "strict_DNNABF": {
+      "test_scenes": 12000,
+      "max_abs_weight_difference": 0.0,
+      "mean_sinr_db": -2.6278330089525075
+    }
+  },
+  "publication_files_hashed": 484,
+  "scope": "Artifact integrity and frozen prediction replay; no retraining or new selection"
+}

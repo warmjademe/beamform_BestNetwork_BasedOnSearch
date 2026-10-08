@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+data/*
+!data/ch3_grid_good_v11/
+runs/*
+!runs/ch3_grid_v11/
+!runs/ch3_gpu_deployment_v1/
+output/pdf/*
+!output/pdf/ch3_latest_pattern/
+!output/pdf/ch3_selected_pattern/
+tmp/

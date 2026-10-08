@@ -1,0 +1,63 @@
+{
+  "source": "/Users/qyb/RESEARCH/lgd_PHD_2026_beamforming/main.tex",
+  "sha256": "44c424ac2efb747b670e70b429ef5086026cb9a7d6d445fe2bebc91d6db801e9",
+  "paper_main_null_table": {
+    "3": {
+      "DNNABF_main_deg": 0.04,
+      "A_DNNABF_main_deg": 0.021,
+      "DNNABF_null_deg": 1.08,
+      "A_DNNABF_null_deg": 0.973
+    },
+    "4": {
+      "DNNABF_main_deg": 0.09,
+      "A_DNNABF_main_deg": 0.075,
+      "DNNABF_null_deg": 1.255,
+      "A_DNNABF_null_deg": 1.148
+    },
+    "5": {
+      "DNNABF_main_deg": 0.09,
+      "A_DNNABF_main_deg": 0.064,
+      "DNNABF_null_deg": 1.412,
+      "A_DNNABF_null_deg": 0.955
+    },
+    "6": {
+      "DNNABF_main_deg": 0.11,
+      "A_DNNABF_main_deg": 0.063,
+      "DNNABF_null_deg": 1.621,
+      "A_DNNABF_null_deg": 1.579
+    },
+    "7": {
+      "DNNABF_main_deg": 0.14,
+      "A_DNNABF_main_deg": 0.078,
+      "DNNABF_null_deg": 1.598,
+      "A_DNNABF_null_deg": 1.325
+    },
+    "8": {
+      "DNNABF_main_deg": 0.13,
+      "A_DNNABF_main_deg": 0.067,
+      "DNNABF_null_deg": 1.61,
+      "A_DNNABF_null_deg": 1.457
+    }
+  },
+  "paper_inference_seconds": {
+    "MVDR": 0.3158,
+    "A_DNNABF": 0.0325
+  },
+  "paper_speedup": 9.716923076923077,
+  "paper_reports_quantitative_SINR_comparison": false,
+  "paper_method": {
+    "backbone": "Transformer",
+    "loss": "MSE",
+    "dataset_total": 600000,
+    "train": 400000,
+    "validation": 100000,
+    "test": 100000
+  },
+  "new_run_method": {
+    "backbone": "DARTS selected residual dense network",
+    "loss": "restored physical objective with MSE controls",
+    "dataset_total": 90000,
+    "conditional": "separated integer AOA grid and Oracle good eligibility"
+  },
+  "timing_comparison_requested_by_user": "Same single AOA scene to final complex weight vector, including feature or covariance construction; CPU and GPU reported separately; no training/search in inference time."
+}

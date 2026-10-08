@@ -1,0 +1,6 @@
+{
+  "state": "complete",
+  "candidate_meets_proximity": true,
+  "split": "selection_validation",
+  "test_used_for_training_or_selection": false
+}

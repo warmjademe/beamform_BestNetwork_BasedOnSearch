@@ -1,0 +1,17 @@
+{
+  "pass": true,
+  "test_indices": [
+    2,
+    0
+  ],
+  "changed_interference_counts": [
+    3,
+    8
+  ],
+  "max_abs_weight_differences": [
+    0.0,
+    0.0
+  ],
+  "one_graph_reused": true,
+  "CLI_sha256": "70ba05a4a00916b6d04da9fce3f2d986381c4a8778b0e0f2a8fe8adc940080ee"
+}

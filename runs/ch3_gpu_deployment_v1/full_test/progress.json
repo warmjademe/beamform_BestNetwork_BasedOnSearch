@@ -1,0 +1,205 @@
+{
+  "stage": "whole_test_timing",
+  "rows": [
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_optimized",
+      "repeat": 0,
+      "total_seconds": 0.587806738,
+      "samples": 12000,
+      "mean_ms": 0.04898389483333333
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_standard",
+      "repeat": 0,
+      "total_seconds": 5.712371334,
+      "samples": 12000,
+      "mean_ms": 0.47603094450000005
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "DNNABF_standard",
+      "repeat": 0,
+      "total_seconds": 2.936816936,
+      "samples": 12000,
+      "mean_ms": 0.24473474466666667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_optimized_supplement",
+      "repeat": 0,
+      "total_seconds": 0.952664387,
+      "samples": 12000,
+      "mean_ms": 0.07938869891666667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_standard",
+      "repeat": 0,
+      "total_seconds": 11.890233308,
+      "samples": 12000,
+      "mean_ms": 0.9908527756666666
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_standard",
+      "repeat": 1,
+      "total_seconds": 11.902217105,
+      "samples": 12000,
+      "mean_ms": 0.9918514254166666
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_standard",
+      "repeat": 1,
+      "total_seconds": 5.504187147,
+      "samples": 12000,
+      "mean_ms": 0.45868226225
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_optimized_supplement",
+      "repeat": 1,
+      "total_seconds": 0.941149251,
+      "samples": 12000,
+      "mean_ms": 0.07842910425
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_optimized",
+      "repeat": 1,
+      "total_seconds": 0.576787628,
+      "samples": 12000,
+      "mean_ms": 0.04806563566666667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "DNNABF_standard",
+      "repeat": 1,
+      "total_seconds": 2.804937699,
+      "samples": 12000,
+      "mean_ms": 0.23374480825000002
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_standard",
+      "repeat": 2,
+      "total_seconds": 11.831057246,
+      "samples": 12000,
+      "mean_ms": 0.9859214371666667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_optimized",
+      "repeat": 2,
+      "total_seconds": 0.5953402,
+      "samples": 12000,
+      "mean_ms": 0.04961168333333333
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "DNNABF_standard",
+      "repeat": 2,
+      "total_seconds": 2.809540252,
+      "samples": 12000,
+      "mean_ms": 0.23412835433333334
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_standard",
+      "repeat": 2,
+      "total_seconds": 5.466220047,
+      "samples": 12000,
+      "mean_ms": 0.45551833724999996
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_optimized_supplement",
+      "repeat": 2,
+      "total_seconds": 0.943409494,
+      "samples": 12000,
+      "mean_ms": 0.07861745783333333
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "DNNABF_standard",
+      "repeat": 3,
+      "total_seconds": 2.797291469,
+      "samples": 12000,
+      "mean_ms": 0.2331076224166667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_optimized",
+      "repeat": 3,
+      "total_seconds": 0.586280334,
+      "samples": 12000,
+      "mean_ms": 0.048856694500000006
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_optimized_supplement",
+      "repeat": 3,
+      "total_seconds": 0.935874799,
+      "samples": 12000,
+      "mean_ms": 0.07798956658333334
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_standard",
+      "repeat": 3,
+      "total_seconds": 5.462151518,
+      "samples": 12000,
+      "mean_ms": 0.45517929316666667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_standard",
+      "repeat": 3,
+      "total_seconds": 11.847575953,
+      "samples": 12000,
+      "mean_ms": 0.9872979960833334
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_standard",
+      "repeat": 4,
+      "total_seconds": 5.470060893,
+      "samples": 12000,
+      "mean_ms": 0.45583840775000006
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "MVDR_optimized_supplement",
+      "repeat": 4,
+      "total_seconds": 0.944227235,
+      "samples": 12000,
+      "mean_ms": 0.07868560291666667
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_standard",
+      "repeat": 4,
+      "total_seconds": 11.783905206,
+      "samples": 12000,
+      "mean_ms": 0.9819921005
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "ours_optimized",
+      "repeat": 4,
+      "total_seconds": 0.587653911,
+      "samples": 12000,
+      "mean_ms": 0.04897115925
+    },
+    {
+      "scope": "GPU_resident_whole_test",
+      "method": "DNNABF_standard",
+      "repeat": 4,
+      "total_seconds": 2.802218701,
+      "samples": 12000,
+      "mean_ms": 0.23351822508333336
+    }
+  ]
+}

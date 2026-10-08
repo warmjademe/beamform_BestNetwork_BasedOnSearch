@@ -1,0 +1,1147 @@
+{
+  "protocol": {
+    "id": "chapter3_structured_grid_good_only_v11",
+    "paper_scene": {
+      "desired_deg": 18,
+      "interference_deg": [
+        -32,
+        -20,
+        -14,
+        -4,
+        7,
+        25,
+        36,
+        58
+      ]
+    },
+    "generation": {
+      "rule": "Deterministic combinatorial enumeration on the published integer-degree angular grid, with declared separations derived from the published example. This is a new reconstruction, not recovered historical data generation code.",
+      "angle_min_deg": -90,
+      "angle_max_deg": 90,
+      "step_deg": 1,
+      "minimum_desired_interference_separation_deg": 7,
+      "minimum_any_source_separation_deg": 6,
+      "interferers": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "ordering": "Cycle desired angles and K; use a coprime stride through lexicographic combination ranks. Interferer spacing is enforced by compressed-index unranking. No random AOA draws.",
+      "counts": {
+        "train": 60000,
+        "architecture_validation": 12000,
+        "selection_validation": 6000,
+        "test": 12000
+      },
+      "split_group": "desired angle; all scenes at the same desired angle stay in the same split",
+      "split_residues_mod_10": {
+        "train": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "architecture_validation": [
+          6,
+          7
+        ],
+        "selection_validation": [
+          8
+        ],
+        "test": [
+          9
+        ]
+      },
+      "exclude_prior_neural_and_diagnostic_scenes": true,
+      "bad_fraction": 0,
+      "candidate_batch_size": 8192,
+      "maximum_candidates": 3000000,
+      "ordering_seed": 2026100841,
+      "snapshot_seed": 2026100842
+    },
+    "physics": {
+      "antennas": 12,
+      "spacing_wavelengths": 0.5,
+      "snr_db": 10,
+      "inr_db": 30,
+      "noise_variance": 1,
+      "snapshots": 1024,
+      "steering": "positive_phase_unit_element_magnitude"
+    },
+    "quality": {
+      "reference": "population interference-plus-noise MVDR evaluated before neural training",
+      "main_error_deg_max": 0.5,
+      "null_mean_error_deg_max": 0.1,
+      "sinr_db_min": 10,
+      "main_rule": "Nearest local power peak including one-sided endpoint maxima on a 0.1-degree scan; endpoint compared to adjacent scan sample.",
+      "null_rule": "One-to-one minimum-total-distance matching to interior minima on a 0.001-degree scan, with analytic derivative verification; missing minima fail.",
+      "scope": "Apply identical Oracle-only eligibility to all splits. Retain rejection records; no filtering on neural results. Nulls need not be computed for scenes already rejected by main error or SINR; mark these as not evaluated."
+    },
+    "search": {
+      "family": "dense",
+      "width": 384,
+      "max_depth": 16,
+      "depths": [
+        2,
+        4,
+        6,
+        8,
+        12,
+        16
+      ],
+      "ff_multipliers": [
+        1,
+        2,
+        4
+      ],
+      "epochs": 60,
+      "warmup_epochs": 5,
+      "batch_size": 512,
+      "seed": 117,
+      "architecture_lr": 0.0003,
+      "alternation": "one weight step and one architecture-validation step after warmup"
+    },
+    "training": {
+      "epochs": 320,
+      "batch_size": 512,
+      "seed": 117,
+      "from_scratch": true,
+      "checkpoint_selection": "minimum selection-validation mean SINR gap",
+      "optimizer": {
+        "name": "AdamW",
+        "lr": 0.001,
+        "weight_decay": 1e-05,
+        "cosine_min_lr": 1e-05,
+        "gradient_clip": 5
+      },
+      "loss": "restored physical objective; matched population-component-MSE control"
+    },
+    "controls": [
+      "fixed DNNABF hidden widths with identical added input/output modules and physical loss",
+      "same searched genotype with population-component MSE",
+      "one predeclared random architecture with physical loss"
+    ],
+    "acceptance": {
+      "mean_gap_db_max": 0.5,
+      "each_k_mean_gap_db_max": 1.0,
+      "p95_gap_db_max": 3.0,
+      "main_MAE_difference_vs_population_MVDR_max_deg": 0.1
+    },
+    "test_policy": "Freeze all model checkpoints and evaluator sources before any neural test prediction. The Oracle-filtered test is generated with the dataset; no training or selection reads its file. Include all frozen controls and every test scene.",
+    "metrics": [
+      "SINR overall and by K",
+      "nearest-local-peak absolute direction error",
+      "global-peak error",
+      "paired NN-versus-Oracle peak difference",
+      "null errors and missing minima",
+      "component MSE and NMSE",
+      "model architecture and parameters",
+      "search/retrain costs",
+      "matched CPU/GPU batch-one latency"
+    ],
+    "latency": {
+      "devices": [
+        "cpu",
+        "cuda"
+      ],
+      "cpu_threads": 4,
+      "batch_size": 1,
+      "scenes_per_k": 10,
+      "passes": 10,
+      "warmup_calls_per_method": 50,
+      "order_seed": 2026100843
+    },
+    "scope_note": "Reference-qualified, separated-angle reconstruction. Report eligibility counts. It does not reproduce the unspecified historical random-AOA distribution; no claim of unrestricted performance or DARTS superiority without matched evidence."
+  },
+  "config": {
+    "antennas": 12,
+    "spacing_wavelengths": 0.5,
+    "snr_db": 10,
+    "inr_db": 30,
+    "noise_variance": 1,
+    "snapshots": 1024,
+    "steering": "positive_phase_unit_element_magnitude"
+  },
+  "source_hashes": {
+    "prepare_ch3_grid_v11.py": "58b907f5f2def696830f661d3bf87e081a4c037ae1af77967f6d30c2d9e7d280",
+    "configs/ch3_grid_v11.json": "3d6b26c105fb76e026bda90af65cd9dea35e63ec6cd9daf7c758f850ad85a940",
+    "evaluate_restored_holdout.py": "c408ca456f28c07d27f338f92a5ac388e4e2cc9e71323352d51c6c194be16a7f",
+    "freeze_restored_candidates.py": "849f13aba62232b95f6170247f5bff369204f56587f418aeaaba0e16df6f93ec",
+    "original_array_evaluation.py": "af3b34e0f8c0f6e54f93ee743213480cf6e96efd4657fb84eb8578bf192819dd",
+    "beamnas/data.py": "da763138f4ce1249bde49bb23fdf89923b9f869f226f6cd375d471f4dfa99e41",
+    "beamnas/dnnabf_reference.py": "ef5bb3c2b05d36a397b5eea9c0af304a9b4f319aa1914ea5f160e4e7facc30ff",
+    "beamnas/common.py": "1b98e1eff4faf0da6caa080ad429687309964ce72637c49383fda00f30f38f27",
+    "beamnas/pointing.py": "e99d358034366a40a708cb0fb7d507658fd21d1c6b0e72b9189942d577fb0eaf",
+    "beamnas/dense_search.py": "ac756167d0df1be268e46f7d7f61b5a60c5d3aaa41d80295712de40e8f80d300",
+    "beamnas/train.py": "69da6752d1952932026d221748d1be8ba88f4971db89f18a431ca693723e8e0a",
+    "beamnas/pointing_boundary.py": "d3752796e5e0f0134bcca01b0e9b1ee95198beb5b4095284c5f1c32621837a48",
+    "beamnas/original_modules.py": "5aa47bb943402ade87441f76a21222c11cbeaf50d7cdfe6abe49fab654666e53",
+    "beamnas/restored_objective.py": "7fe4b9eba32afc0fae78b2b1761e1d4bfaebdf7ab0512e161f21e0f0bc1e3abb",
+    "beamnas/model.py": "8b17578c3a072a1886631de07a4e261d5b56795f1b4a03864f39daf191da6cb3",
+    "beamnas/refined.py": "4182d27a16fa8f7b2fe74661fdbf14699ce542ece0324a9db55265a4642c67d8",
+    "beamnas/pooled_modules.py": "34705f0256b183345561a93e452ae9c9ad29f540fb9cf47e73d82d153e008721",
+    "beamnas/__init__.py": "e2ba4e885c2558a536dfe29beaed1a057146c62000185d9716ec255934288b12",
+    "beamnas/evaluate.py": "5039a5f4b996c50ac0eae31fe05c2772871a86b5d354b3518517f4220255f844",
+    "beamnas/strict_dnnabf.py": "381a0d9477a3daa34fb13b40efa9feed55b5d636e05f4b6ecd1832ff4fe486b9",
+    "beamnas/original_physical_loss.py": "4b61c5e71939bc103f3eb6e5fba8b0d3bcf8160cb524386d5e362f9f46eb4d22"
+  },
+  "exclusions": [
+    {
+      "path": "data/ch3_template_good_v10/reference_quality_audit.npz",
+      "sha256": "c0f0b503e6340d52e727e5ba77e7602d60d32a40ea0b80863d4f815b2e893b6d",
+      "scenes": 19929,
+      "new_unique_keys": 19929,
+      "columns": 9
+    },
+    {
+      "path": "data/ch3_template_good_v10/train.npz",
+      "sha256": "2dc55352f68f0add013ad7b59a0d121d8d3706b3c62fb433bd58c606e10d888e",
+      "scenes": 4349,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "data/full_v1/test.npz",
+      "sha256": "805061ffc5d5f4d5abdc57841e76b450412fe4c377f6151440df20c55ca68581",
+      "scenes": 100000,
+      "new_unique_keys": 99999,
+      "columns": 9
+    },
+    {
+      "path": "data/full_v1/train.npz",
+      "sha256": "b7ca169c1b079425552c7087061e87051be853a5d38d9aee63f439a6d13947ca",
+      "scenes": 400000,
+      "new_unique_keys": 400000,
+      "columns": 9
+    },
+    {
+      "path": "data/full_v1/validation.npz",
+      "sha256": "978615afc2ad5626229d88c1c5d0108dfd731ba0ef62ff0bcdca5bc05fa4f84f",
+      "scenes": 100000,
+      "new_unique_keys": 100000,
+      "columns": 9
+    },
+    {
+      "path": "data/original_modules_v4/architecture_validation.npz",
+      "sha256": "7a7d6162f0a9e47842254c0f1156a2695d406dcfd048c05b63de1043d9249cb6",
+      "scenes": 40002,
+      "new_unique_keys": 40002,
+      "columns": 9
+    },
+    {
+      "path": "data/original_modules_v4/selection_validation.npz",
+      "sha256": "9682e05a3588b984d7de8eb160f93494b8a047911694e28720173ebb5451b6a1",
+      "scenes": 12000,
+      "new_unique_keys": 12000,
+      "columns": 9
+    },
+    {
+      "path": "data/original_modules_v4/train.npz",
+      "sha256": "5724a7b5185d1850acbb98f0c3146f841277d38426181ee5032035374dd397eb",
+      "scenes": 400000,
+      "new_unique_keys": 399997,
+      "columns": 9
+    },
+    {
+      "path": "data/original_modules_v4_smoke/architecture_validation.npz",
+      "sha256": "c8170f6a05fc7742bf883ff3eacc4d30801aa1d2563b3ebd9d74b9053bcefe9a",
+      "scenes": 96,
+      "new_unique_keys": 96,
+      "columns": 9
+    },
+    {
+      "path": "data/original_modules_v4_smoke/selection_validation.npz",
+      "sha256": "dc7083d1ff463c21af0c9310af81a2d5320a28b7e6ea365cc07da2c7a2bea3e7",
+      "scenes": 96,
+      "new_unique_keys": 96,
+      "columns": 9
+    },
+    {
+      "path": "data/original_modules_v4_smoke/train.npz",
+      "sha256": "a4f2f84f78b715b256d8cb16cfaf5a9d684a12afae46caff4d46efa5ecd8bd30",
+      "scenes": 96,
+      "new_unique_keys": 96,
+      "columns": 9
+    },
+    {
+      "path": "data/repeated_teacher_mse_v6/architecture_validation.npz",
+      "sha256": "8d58ea0e8dbbe4416a69ec6818b90e0723aec134b0a06727861de54bfc7a31d5",
+      "scenes": 40002,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "data/repeated_teacher_mse_v6/selection_validation.npz",
+      "sha256": "9682e05a3588b984d7de8eb160f93494b8a047911694e28720173ebb5451b6a1",
+      "scenes": 12000,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "data/repeated_teacher_mse_v6/train.npz",
+      "sha256": "b59801be63cf159b39bfed7d71fe052fc1d1ea411903d58e8008e3cfe00bb52c",
+      "scenes": 400000,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "data/repeated_teacher_mse_v6_smoke/architecture_validation.npz",
+      "sha256": "d31d6b2bcdd5f69a3a42b44f5400b10cbffa284e97513735e0126c82d2b45f78",
+      "scenes": 96,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "data/repeated_teacher_mse_v6_smoke/selection_validation.npz",
+      "sha256": "9682e05a3588b984d7de8eb160f93494b8a047911694e28720173ebb5451b6a1",
+      "scenes": 12000,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "data/repeated_teacher_mse_v6_smoke/train.npz",
+      "sha256": "7eab72d399e8f3e4955303010ee74c2c8d63596feb0cf755f90ee4b7acbc2830",
+      "scenes": 96,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "data/smoke_v1/test.npz",
+      "sha256": "9392ee15b71d8d88b0b8f97206b88b64b483a7c76f743723446c6424b65c599c",
+      "scenes": 256,
+      "new_unique_keys": 256,
+      "columns": 9
+    },
+    {
+      "path": "data/smoke_v1/train.npz",
+      "sha256": "322ea75ae28f39db11688338608c014a33ffc91b5095e096b6e139e91b7f5c1b",
+      "scenes": 1024,
+      "new_unique_keys": 1024,
+      "columns": 9
+    },
+    {
+      "path": "data/smoke_v1/validation.npz",
+      "sha256": "b8a6300f33b9b784df701d9b559095228b36a3bdcb8ae3c50f8e13477f209f42",
+      "scenes": 256,
+      "new_unique_keys": 256,
+      "columns": 9
+    },
+    {
+      "path": "runs/dnnabf_original_metrics_audit_v2/DNNABF_reconstruction.npz",
+      "sha256": "3ef002a477b3de1fca8fc1a9c7742a9b4f5008125ffa4e5ed29fde170fba0866",
+      "scenes": 100,
+      "new_unique_keys": 100,
+      "columns": 5
+    },
+    {
+      "path": "runs/dnnabf_original_metrics_audit_v2/population_MVDR.npz",
+      "sha256": "b6378c3611bca2d07f6b13163f77ae031aa3c33f8428847f031f67c910acdb87",
+      "scenes": 100,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/dnnabf_original_metrics_audit_v2/sample_MVDR_teacher.npz",
+      "sha256": "ba28ab71e89e2a43f883989fa771d496f74776dcf6076c1672d614647ed5bb31",
+      "scenes": 100,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k3_v1/metric_audit/DNNABF_reconstruction.npz",
+      "sha256": "45d7553284b7210b8195e542ed5a35b66bc858cdd97b0c1b2b03c7b02877d2ee",
+      "scenes": 100,
+      "new_unique_keys": 100,
+      "columns": 4
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k3_v1/metric_audit/population_MVDR.npz",
+      "sha256": "7a6d1254e804362ec9267780d0138612c05124c0cafd3a75335038b171ab71c6",
+      "scenes": 100,
+      "new_unique_keys": 0,
+      "columns": 4
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k3_v1/metric_audit/sample_MVDR_teacher.npz",
+      "sha256": "228d31ed1c3328d6673e7b950ee3942a9ed97910477c1ad68dfd883e727e1902",
+      "scenes": 100,
+      "new_unique_keys": 0,
+      "columns": 4
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k3_v1/test.npz",
+      "sha256": "d07c9d4a762d22d26312baecdd3f60874ece740a89edfa8a2bcff8bef99178a4",
+      "scenes": 100,
+      "new_unique_keys": 0,
+      "columns": 4
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k3_v1/train.npz",
+      "sha256": "0fce725209e53c12d1a989887360aff6c5896cecdafed9ba8d4fe5792aca2748",
+      "scenes": 15000,
+      "new_unique_keys": 15000,
+      "columns": 4
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k4_v1/metric_audit/DNNABF_reconstruction.npz",
+      "sha256": "82a176f98c047d9d7bbcc3961afb1048166077401262ffa37fdcefd266c87058",
+      "scenes": 100,
+      "new_unique_keys": 100,
+      "columns": 5
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k4_v1/metric_audit/population_MVDR.npz",
+      "sha256": "a56e99b12107a8ee7f17d8d05c2c4c60e446bc1bb30e2c0daac45f2e649b3ea8",
+      "scenes": 100,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k4_v1/metric_audit/sample_MVDR_teacher.npz",
+      "sha256": "9c525737b9b2fa7f8cb9e01cd368396ae44a7f3199a3d1af68b1dd24a7062440",
+      "scenes": 100,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k4_v1/test.npz",
+      "sha256": "bf0976f9e68a89858c7c88427fa843820019919202897f7258e77026d19ba74e",
+      "scenes": 100,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k4_v1/train.npz",
+      "sha256": "b1301498924ae3629f0f87ee70f77ea7037dd4d613923a7e8b58ee999b5f8286",
+      "scenes": 15000,
+      "new_unique_keys": 15000,
+      "columns": 5
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k5_v1/metric_audit/DNNABF_reconstruction.npz",
+      "sha256": "ae26f0b8705fa92ec57e712be551e1124c04504a4e5e57019e9d3a2aeedab794",
+      "scenes": 100,
+      "new_unique_keys": 100,
+      "columns": 6
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k5_v1/metric_audit/population_MVDR.npz",
+      "sha256": "50c8908f410b81d582e76dd075277c79e2ca0c5c06fa664065dc1b60134580ba",
+      "scenes": 100,
+      "new_unique_keys": 0,
+      "columns": 6
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k5_v1/metric_audit/sample_MVDR_teacher.npz",
+      "sha256": "5ec0f02e4f9f297ef71b48615079abe96a0ac81372a87eb816dfbfde4fcbf6f2",
+      "scenes": 100,
+      "new_unique_keys": 0,
+      "columns": 6
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k5_v1/test.npz",
+      "sha256": "9fa874edbe86173d5f2f320504a308d5f22a8d481b7eec0a39987b9edf411c2a",
+      "scenes": 100,
+      "new_unique_keys": 0,
+      "columns": 6
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_calibrated_k5_v1/train.npz",
+      "sha256": "f701a7ae893457207d12b20441e44bb20e64dee381fd141c6e75bda362b787a0",
+      "scenes": 15000,
+      "new_unique_keys": 15000,
+      "columns": 6
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_k4_v1/test.npz",
+      "sha256": "0f029ad3f50003835f6241145629c9a0a4b51f98307c6ec2e43e762caa562a46",
+      "scenes": 100,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/dnnabf_original_pdf_k4_v1/train.npz",
+      "sha256": "87cd47dd70c35ff1df29cfdacff5d5aec7ba97b015f6e4446ecff97414d6c1c0",
+      "scenes": 15000,
+      "new_unique_keys": 15000,
+      "columns": 5
+    },
+    {
+      "path": "runs/four_candidate_test_v2/fresh_test/angles.npz",
+      "sha256": "08ba2e87f89286b2df64da29405a06e2f52c7eacd20a0174e1bc638817dd9cc6",
+      "scenes": 100000,
+      "new_unique_keys": 99999,
+      "columns": 9
+    },
+    {
+      "path": "runs/mainpeak_probe_v3/conventional.npz",
+      "sha256": "a816b94dcbc14b1c8910d0937d0a0698157fbf6764c5b3f60d57b1fa1f65ef69",
+      "scenes": 384,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "runs/mainpeak_probe_v3/mvdr.npz",
+      "sha256": "c2ecde1a4c606c5259d9c66b63dbc12159e4a404809f9150ba2fb5b560e98030",
+      "scenes": 384,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "runs/mainpeak_probe_v3/stationary_rho0.npz",
+      "sha256": "5405ce8a9de83323eb5cd33b966183aae9c565f4a01428cafae886c527713cd0",
+      "scenes": 384,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "runs/mainpeak_probe_v3/stationary_rho1.npz",
+      "sha256": "a7272c86c38345840e063bf6cb50f42d5d8bcb42f0d69b0cabef52226b385879",
+      "scenes": 384,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "runs/mainpeak_probe_v3/stationary_rho10.npz",
+      "sha256": "a3d1cf806c6d48b8a025c87e41af6d1e5768eb3b68e203efec7595c1de06e3be",
+      "scenes": 384,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "runs/mainpeak_probe_v3/stationary_rho100.npz",
+      "sha256": "ea1885f3cb3c44e7a99305f8e4c5916f9847d62c71b6a761f0fc5e1bc8baf9a9",
+      "scenes": 384,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "runs/matched_dnnabf_test_v3/fresh_test/angles.npz",
+      "sha256": "26e8d971047cb52842f015683e1221b8781bdf10d311c4691c3ad3a45466231b",
+      "scenes": 100000,
+      "new_unique_keys": 99998,
+      "columns": 9
+    },
+    {
+      "path": "runs/original_label_variance_v1/labels.npz",
+      "sha256": "d2556a0d6cb2cfa304991b54b5fb657b17351babe7f6a5fe7fa6d64007d4a5eb",
+      "scenes": 60,
+      "new_unique_keys": 0,
+      "columns": 9
+    },
+    {
+      "path": "runs/restored_v9_single_holdout_v2/fresh_test/angles.npz",
+      "sha256": "7de399eca2bb5c281af5f0ed4776c8e0eaaecde4fd6923ba81dab1cef4f91747",
+      "scenes": 100000,
+      "new_unique_keys": 100000,
+      "columns": 9
+    },
+    {
+      "path": "runs/strict_dnnabf_development_k4_scaled_init_v1/architecture_validation.npz",
+      "sha256": "605b3316c5851cb85575cd6746cd75501f32f88779279353ba8cc8d1d50b37f4",
+      "scenes": 5000,
+      "new_unique_keys": 5000,
+      "columns": 5
+    },
+    {
+      "path": "runs/strict_dnnabf_development_k4_scaled_init_v1/selection_validation.npz",
+      "sha256": "28726f23dd9a6e9354eaa733a20f79aadf8b7926bffd147c7968d6fb3b43da62",
+      "scenes": 5000,
+      "new_unique_keys": 5000,
+      "columns": 5
+    },
+    {
+      "path": "runs/strict_dnnabf_development_k4_scaled_init_v1/train.npz",
+      "sha256": "0998aa38517ac4660c19fc4e65ca48756671faa622436f865a77843cdd13a4af",
+      "scenes": 40000,
+      "new_unique_keys": 40000,
+      "columns": 5
+    },
+    {
+      "path": "runs/strict_dnnabf_development_k4_v1/architecture_validation.npz",
+      "sha256": "605b3316c5851cb85575cd6746cd75501f32f88779279353ba8cc8d1d50b37f4",
+      "scenes": 5000,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/strict_dnnabf_development_k4_v1/selection_validation.npz",
+      "sha256": "28726f23dd9a6e9354eaa733a20f79aadf8b7926bffd147c7968d6fb3b43da62",
+      "scenes": 5000,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/strict_dnnabf_development_k4_v1/train.npz",
+      "sha256": "0998aa38517ac4660c19fc4e65ca48756671faa622436f865a77843cdd13a4af",
+      "scenes": 40000,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/strict_dnnabf_smoke_scaled_v1/architecture_validation.npz",
+      "sha256": "3b8e69a23294f4658b2ad4031028856d1676f7a517e84e252b481db0c8671f58",
+      "scenes": 16,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/strict_dnnabf_smoke_scaled_v1/selection_validation.npz",
+      "sha256": "cd399e18507f55193024ffa91e854e9130821bbe6dc6dad312315fa99aefe03f",
+      "scenes": 16,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/strict_dnnabf_smoke_scaled_v1/train.npz",
+      "sha256": "606eda564a56eab61a6f59733b59ff36c192f6fd6c524a729fabb8b8a67b73b5",
+      "scenes": 64,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/strict_dnnabf_smoke_v3/architecture_validation.npz",
+      "sha256": "3b8e69a23294f4658b2ad4031028856d1676f7a517e84e252b481db0c8671f58",
+      "scenes": 16,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/strict_dnnabf_smoke_v3/selection_validation.npz",
+      "sha256": "cd399e18507f55193024ffa91e854e9130821bbe6dc6dad312315fa99aefe03f",
+      "scenes": 16,
+      "new_unique_keys": 0,
+      "columns": 5
+    },
+    {
+      "path": "runs/strict_dnnabf_smoke_v3/train.npz",
+      "sha256": "606eda564a56eab61a6f59733b59ff36c192f6fd6c524a729fabb8b8a67b73b5",
+      "scenes": 64,
+      "new_unique_keys": 0,
+      "columns": 5
+    }
+  ],
+  "complete": true,
+  "splits": {
+    "train": {
+      "n": 60000,
+      "sha256": "a85eea2e81022c3ed166301830205223852d2d595b0ef9b358cec0f2fdf18114",
+      "counts_by_k": {
+        "3": 10000,
+        "4": 10000,
+        "5": 10000,
+        "6": 10000,
+        "7": 10000,
+        "8": 10000
+      },
+      "desired_angle_groups": [
+        -90.0,
+        -89.0,
+        -88.0,
+        -87.0,
+        -86.0,
+        -85.0,
+        -80.0,
+        -79.0,
+        -78.0,
+        -77.0,
+        -76.0,
+        -75.0,
+        -70.0,
+        -69.0,
+        -68.0,
+        -67.0,
+        -66.0,
+        -65.0,
+        -60.0,
+        -59.0,
+        -58.0,
+        -57.0,
+        -56.0,
+        -55.0,
+        -50.0,
+        -49.0,
+        -48.0,
+        -47.0,
+        -46.0,
+        -45.0,
+        -40.0,
+        -39.0,
+        -38.0,
+        -37.0,
+        -36.0,
+        -35.0,
+        -30.0,
+        -29.0,
+        -28.0,
+        -27.0,
+        -26.0,
+        -25.0,
+        -20.0,
+        -19.0,
+        -18.0,
+        -17.0,
+        -16.0,
+        -15.0,
+        -10.0,
+        -9.0,
+        -8.0,
+        -7.0,
+        -6.0,
+        -5.0,
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0,
+        20.0,
+        21.0,
+        22.0,
+        23.0,
+        24.0,
+        25.0,
+        30.0,
+        31.0,
+        32.0,
+        33.0,
+        34.0,
+        35.0,
+        40.0,
+        41.0,
+        42.0,
+        43.0,
+        44.0,
+        45.0,
+        50.0,
+        51.0,
+        52.0,
+        53.0,
+        54.0,
+        55.0,
+        60.0,
+        61.0,
+        62.0,
+        63.0,
+        64.0,
+        65.0,
+        70.0,
+        71.0,
+        72.0,
+        73.0,
+        74.0,
+        75.0,
+        80.0,
+        81.0,
+        82.0,
+        83.0,
+        84.0,
+        85.0,
+        90.0
+      ],
+      "bad_scenes": 0
+    },
+    "architecture_validation": {
+      "n": 12000,
+      "sha256": "f57b76f72ffe6bb509972c3176dd30c29fa8f642c33c598d0b9c15790b3e2bd8",
+      "counts_by_k": {
+        "3": 2000,
+        "4": 2000,
+        "5": 2000,
+        "6": 2000,
+        "7": 2000,
+        "8": 2000
+      },
+      "desired_angle_groups": [
+        -84.0,
+        -83.0,
+        -74.0,
+        -73.0,
+        -64.0,
+        -63.0,
+        -54.0,
+        -53.0,
+        -44.0,
+        -43.0,
+        -34.0,
+        -33.0,
+        -24.0,
+        -23.0,
+        -14.0,
+        -13.0,
+        -4.0,
+        -3.0,
+        6.0,
+        7.0,
+        16.0,
+        17.0,
+        26.0,
+        27.0,
+        36.0,
+        37.0,
+        46.0,
+        47.0,
+        56.0,
+        57.0,
+        66.0,
+        67.0,
+        76.0,
+        77.0,
+        86.0,
+        87.0
+      ],
+      "bad_scenes": 0
+    },
+    "selection_validation": {
+      "n": 6000,
+      "sha256": "d98876fc1a5339a3d77efe26fe8ef363eba389702a70bbdebc49bded92dcd579",
+      "counts_by_k": {
+        "3": 1000,
+        "4": 1000,
+        "5": 1000,
+        "6": 1000,
+        "7": 1000,
+        "8": 1000
+      },
+      "desired_angle_groups": [
+        -82.0,
+        -72.0,
+        -62.0,
+        -52.0,
+        -42.0,
+        -32.0,
+        -22.0,
+        -12.0,
+        -2.0,
+        8.0,
+        18.0,
+        28.0,
+        38.0,
+        48.0,
+        58.0,
+        68.0,
+        78.0,
+        88.0
+      ],
+      "bad_scenes": 0
+    },
+    "test": {
+      "n": 12000,
+      "sha256": "a7050d7e2dc4c884e555fb0c36966130354984f61bf926791d637e255dfb92c9",
+      "counts_by_k": {
+        "3": 2000,
+        "4": 2000,
+        "5": 2000,
+        "6": 2000,
+        "7": 2000,
+        "8": 2000
+      },
+      "desired_angle_groups": [
+        -81.0,
+        -71.0,
+        -61.0,
+        -51.0,
+        -41.0,
+        -31.0,
+        -21.0,
+        -11.0,
+        -1.0,
+        9.0,
+        19.0,
+        29.0,
+        39.0,
+        49.0,
+        59.0,
+        69.0,
+        79.0,
+        89.0
+      ],
+      "bad_scenes": 0
+    }
+  },
+  "test_used_for_training_or_selection": false,
+  "statistics": {
+    "excluded_previous_or_duplicate": 47,
+    "candidates": 507904,
+    "preliminary_pass": 161273,
+    "good": 92239,
+    "retained": 90000,
+    "K3_candidates": 29081,
+    "K3_good": 15389,
+    "K4_candidates": 36144,
+    "K4_good": 15159,
+    "K5_candidates": 48894,
+    "K5_good": 15568,
+    "K6_candidates": 69143,
+    "K6_good": 15263,
+    "K7_candidates": 114767,
+    "K7_good": 15516,
+    "K8_candidates": 209875,
+    "K8_good": 15344,
+    "skipped_filled_quota": 1902941
+  },
+  "audit_files": [
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0000.npz",
+      "sha256": "19353c9ee12d6d96f8f1c33cb0d8c0b70cd1c2d295cde31d5a7aa5d2bc1b144a"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0001.npz",
+      "sha256": "386deb429f48d10bcd09332d8b0f6f941993981fe8abd5a615b1dbf9bc18b4da"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0002.npz",
+      "sha256": "730709fd6628fc143b4ae5089eedfc0749b067a4e2ab920177272048fbbae553"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0003.npz",
+      "sha256": "95f5fd1a5f0d59686285fedaa0e8591337dacd4297392476b6ac9511d4b98122"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0004.npz",
+      "sha256": "a06072a98f37982dfac84975dab91a3e55650c444de60817951581852465f5c4"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0005.npz",
+      "sha256": "a046f631ef4c6c666f15415823c339bc2a3fb278677ef7cae8be7cc1b0516f10"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0006.npz",
+      "sha256": "a201f4786515685c4bafd0f19087a5c69a3c608ac049e3cf9ec6c9ac1169c0ae"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0007.npz",
+      "sha256": "9ca7178770f69cb75ddbfd3330df6852bfa568b6398e1af69a919f5c0af3364a"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0008.npz",
+      "sha256": "420e996f8f92b76c876b19386d2497900f2457b83368fe2c8421f2dbb9d73d47"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0009.npz",
+      "sha256": "2cc398e8419660a3df5fadf6760f723f6c2503c84547428466040f1c26df16d7"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0010.npz",
+      "sha256": "f9eb35783dc7358f1b0607cb7e683d93b8c0aa1940868d6a94cd3b34f6bd59c8"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0011.npz",
+      "sha256": "e3d313de540e7072fecef07bec19300b666b1ef764c33229d4ba3db04f5a4641"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0012.npz",
+      "sha256": "1355b9751a690f8f2329cdff2b7cb6d890f4fb9f312bec88d408add351025280"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0013.npz",
+      "sha256": "bc774cf5a3f2086deb2f451be27f2429b04dcabe6a8e1b0a61dded147112155b"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0014.npz",
+      "sha256": "454fb4a6f1987fc5325a643bb89ba6360a9a3b1d6c610fd62158500145911ab2"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0015.npz",
+      "sha256": "7aa68d818741e26596b60a496953a8c838b2cdd237c6f7c04418ce224cefcfac"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0016.npz",
+      "sha256": "dc90ee60abf15d94fcfebe516f382817d27105cb969c5d37dbb770dd10d51513"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0017.npz",
+      "sha256": "f10e2d6a9017fa2c8f73b3e7ad232df58625cbd82a2df65445539cea2bb02965"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0018.npz",
+      "sha256": "9cff66f620c072f3ca601100d3a84920560bd5a4574aab9f1ec51ec73716eeee"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0019.npz",
+      "sha256": "f3acecbd0c44dee177c2e3b239ff4c76393d64d74d7dcf4142c84612f47619a5"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0020.npz",
+      "sha256": "58e52047c039e773579c7787cd1ff6d2594f9c89d891212fea4b993879688d70"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0021.npz",
+      "sha256": "b9e39b9d54f5a1c9ed7592ba84be9f568dd42cd9fdf846effea5ddfe957f21d0"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0022.npz",
+      "sha256": "6f79db661ecbf077ed7ef19bf5c82ac8a51fddb2b6fbbd37d0bb8299c90edd14"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0023.npz",
+      "sha256": "d17b4264d1d99606b97018d248be749ec60df091a343fbefa4110b4cf2f775a8"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0024.npz",
+      "sha256": "46f150de8732d500077c2866888e16c0346604817e2dd1ffb6175005e0b74567"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0025.npz",
+      "sha256": "3397613a5226b251bd44d6af99d49ad94f3aba4d39586a4800d186aeac365fb8"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0026.npz",
+      "sha256": "b7522edf8da33ede6e756af7ee281515494b7497dc9a1dd1ec85264f8d10ecea"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0027.npz",
+      "sha256": "5d513f12c4ddbbd667edba8cebdc027a4b30a2a9b24d916a06a2839bdf98a18f"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0028.npz",
+      "sha256": "7d23d23b6a90460961b62b8b1221533944892900cc8950528c14e4cd8963e62a"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0029.npz",
+      "sha256": "d7813dc8c47b8cef7c0c63f615f7d4acd99e031b230d43aabe0cc1f0a9162779"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0030.npz",
+      "sha256": "4246c4d78a7bb2318d1668a58192e5dc626cde7fb20a2e5929333257fe330a10"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0031.npz",
+      "sha256": "374f802c55d3991ebfe11b39bb8c27803a54e835fe3db291b1bc2b803a879674"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0032.npz",
+      "sha256": "1be40fe7baae01353bf7f0ff1d4b9ddac1a8989e907618efe6dca68022e17cca"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0033.npz",
+      "sha256": "019a1799994aa83526c2753995f7f21d26903676806809c799d31a72e9d80ec5"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0034.npz",
+      "sha256": "4d8820b512bb0e36f9acf5729383686d73a356dd22abbfe4149f9cd06d16450d"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0035.npz",
+      "sha256": "03335886839b46462b8d168a118b640251b76819b910b67f1f32d5c21bc8d9fb"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0036.npz",
+      "sha256": "61fcf88e0c19b4454324540d0e04ccf1bb78c758b2ebb402b9e0c1a020cdac0c"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0037.npz",
+      "sha256": "e187dd589a8b1fcb859e6e60e5fb482aec181fa50654e92cb2e427ae679de7ec"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0038.npz",
+      "sha256": "a93eac86816e21c2c32ccf7153e4a0d978e5c1beac567cc4127e85f3c478c599"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0039.npz",
+      "sha256": "efe92ccb08221f217a8f5c731974f18d23be5238ef359746e8ea0469a2b4802d"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0040.npz",
+      "sha256": "5cd7af6e772cd23916a801f4a7032729b08d158d30b33e32cd2ea8e3b0d877c0"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0041.npz",
+      "sha256": "86374939b7d55ec5b22b6bb661a5b21820135b024eab723d4b5b666939e595e9"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0042.npz",
+      "sha256": "022c7c31f7d9dcc98a59f228066a2c28a0ac3dbb68a2bbb98bb0d2675556667d"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0043.npz",
+      "sha256": "c15310e9b195a49f760be739610a3128d5c98493d3607c740598f6e3aeb3e713"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0044.npz",
+      "sha256": "e6977fa3743b335750baaac6e3b4619f0f71c252a6d492707ffc17203eabd682"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0045.npz",
+      "sha256": "daafc7929fcda4ddb950fa016a6d5d4f745cdd041752d48a5a2e70e9c3dd2220"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0046.npz",
+      "sha256": "e9db66d80d3272e66c98ee2617328a3fe9f2b85ebbc5997e4ddd74c3bd35d1a2"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0047.npz",
+      "sha256": "a1d5a41c31a9b8d2a05e1c65533bcfe5e0db91b5e4d163b86c5b79fb712334ce"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0048.npz",
+      "sha256": "eefb7dcc15a2c347929bd0bfb3439cfeeb579c746c84962de6d2d080e3579b42"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0049.npz",
+      "sha256": "21c20c68b7eb0c869ca518cb9fcacf09e18bee0fbf04d7190d49e2a7b02a2cbe"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0050.npz",
+      "sha256": "a16cc5ad68f8d9a8186bff4fc109a8c98d22a609601ea0b2e090da8babe0e907"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0051.npz",
+      "sha256": "c2330ac1648178933030fbf76138ca03dd5112e52fd0c8fa91906faf5899854d"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0052.npz",
+      "sha256": "617945bcb55ed2afd8d57e13a1763aa375bfb38943e4bac4de5f1fd6ea1e8368"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0053.npz",
+      "sha256": "e4052ea9ce46de36a6c2cffbb67e3874335688132c802a562f642f89376ee304"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0054.npz",
+      "sha256": "45a0c78cac8219990eeaac5e14c27eeecd878d3aa473ef987e3832b1be997d62"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0055.npz",
+      "sha256": "759cf7f8a863b916d20622b68d7630d486b8b1f508eef7ae2639b958ac12b2ac"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0056.npz",
+      "sha256": "95a933e70831ca5f9095fa1ea0cca73454292d74402fdc57c4222484836c2496"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0057.npz",
+      "sha256": "6e93951133c44547d45cfa3ae2b6fc11c745226e0e2d928f20510e634e3890cb"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0058.npz",
+      "sha256": "49937bde3e806c488cd7272450afda6ecaa974b9f85beef69158e4975dd78ad9"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0059.npz",
+      "sha256": "9068a7a8355f0e5227e0973932b956325f5b4ad179e39b45f4b46c3993b5dfb6"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0060.npz",
+      "sha256": "f3002802aaabe98e7a913dcf6fb25c065c56527e9e9bac9261098e6d0800849f"
+    },
+    {
+      "path": "data/ch3_grid_good_v11/audit/batch_0061.npz",
+      "sha256": "d056881b9b0d020d8174fabe7507cab42f423ae396ef75a3384e6f1ef573877e"
+    }
+  ],
+  "group_overlap": 0,
+  "unique_scene_count": 90000,
+  "generation_seconds": 193.71377007383853
+}

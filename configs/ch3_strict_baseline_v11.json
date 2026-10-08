@@ -1,0 +1,13 @@
+{
+  "id":"ch3_v11_original_form_DNNABF_control",
+  "scope":"Original AOA/PReLU/tanh/MSE form on the new good-only dataset; training budget and unspecified optimizer details are declared reconstruction choices, not recovered historical settings.",
+  "seed":117,"fixed_widths":[2048,1024,1024,1024],
+  "input_initial_weight_scale":0.011111111111111112,
+  "input":"K+1 raw degree-valued AOAs; one fixed network per K, no padding, phase features or output projection",
+  "output":"24 real components with tanh",
+  "labels":"Unscaled stored sample-MVDR labels from 1024 interference-plus-noise snapshots; no label clipping or normalization",
+  "selection":"minimum selection-validation component MSE per K",
+  "training":{"epochs":320,"batch_size":512,"learning_rate":0.001,"weight_decay":0,"grad_clip":5,"optimizer":"Adam","cosine_min_lr":0.00001},
+  "conditioning":"First-layer initialization and learning rate multiplied by 1/90 to condition raw degree units; forward input stays raw AOA. Same established strict baseline helper, not a new input feature.",
+  "test_accessed":false
+}

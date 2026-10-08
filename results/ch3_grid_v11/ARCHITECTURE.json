@@ -1,0 +1,36 @@
+{
+  "family": "residual_dense",
+  "width": 384,
+  "depth": 4,
+  "layers": [
+    {
+      "ff": 2,
+      "activation": "silu",
+      "skip": "linear",
+      "long_skip": "none"
+    },
+    {
+      "ff": 4,
+      "activation": "silu",
+      "skip": "identity",
+      "long_skip": "input"
+    },
+    {
+      "ff": 2,
+      "activation": "gelu",
+      "skip": "identity",
+      "long_skip": "two_back"
+    },
+    {
+      "ff": 1,
+      "activation": "silu",
+      "skip": "identity",
+      "long_skip": "two_back"
+    }
+  ],
+  "residual_scale": 0.25,
+  "long_skip_scale": 0.25,
+  "input": "relative_spatial_phase_27_features",
+  "output": "centrohermitian_distortionless_projection",
+  "selection": "per_choice_argmax"
+}

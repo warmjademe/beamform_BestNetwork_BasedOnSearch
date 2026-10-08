@@ -1,0 +1,16 @@
+{
+  "completed_at": "2026-10-08T12:19:37.921553+08:00",
+  "scope": "one GPU-DARTS network that meets predefined independent-test MVDR proximity criteria on the user-approved separated-angle good-only domain",
+  "user_acceptance": "mvdr 目标目前可以了",
+  "additional_search_required": false,
+  "candidate_checkpoint": "runs/ch3_grid_v11/candidate/retrain/best.pt",
+  "candidate_checkpoint_sha256": "c6b78ba24c8f3e6ac251aa2d1237fa08af2bb43129dca05751d610b4c7626f35",
+  "final_report_sha256": "145092756093d92e34b32c3eca4895c137bb5fea9c937cbd380c701a1512c374",
+  "GPU_timing_audit_sha256": "316782b7d8d4e41c38c58f741d6837b5cc22240f2017c36d13aaa8feb2d79304",
+  "test_scenes": 12000,
+  "proximity_passed": true,
+  "original_paper_all_numeric_results_reproduced": false,
+  "inference_speedup_reproduced": false,
+  "primary_inference_device": "RTX 4090",
+  "paper_modified": false
+}

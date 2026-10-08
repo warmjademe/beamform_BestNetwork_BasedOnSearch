@@ -1,0 +1,11 @@
+{
+  "family": "fixed_dnnabf_modules",
+  "hidden_widths": [
+    2048,
+    1024,
+    1024,
+    1024
+  ],
+  "activation": "PReLU",
+  "selection": "fixed_before_training"
+}

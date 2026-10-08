@@ -1,0 +1,17 @@
+{
+  "family": "raw_aoa_dense",
+  "widths": [
+    2048,
+    1024,
+    1024,
+    1024
+  ],
+  "skips": [
+    "none",
+    "none",
+    "none",
+    "none"
+  ],
+  "activation": "PReLU",
+  "output": "tanh"
+}

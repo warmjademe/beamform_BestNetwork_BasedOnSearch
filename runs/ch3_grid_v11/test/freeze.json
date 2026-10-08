@@ -1,0 +1,894 @@
+{
+  "models": {
+    "candidate": {
+      "checkpoint": "runs/ch3_grid_v11/candidate/retrain/best.pt",
+      "checkpoint_sha256": "c6b78ba24c8f3e6ac251aa2d1237fa08af2bb43129dca05751d610b4c7626f35",
+      "run": "runs/ch3_grid_v11/candidate",
+      "role": "candidate",
+      "genotype": {
+        "family": "residual_dense",
+        "width": 384,
+        "depth": 4,
+        "layers": [
+          {
+            "ff": 2,
+            "activation": "silu",
+            "skip": "linear",
+            "long_skip": "none"
+          },
+          {
+            "ff": 4,
+            "activation": "silu",
+            "skip": "identity",
+            "long_skip": "input"
+          },
+          {
+            "ff": 2,
+            "activation": "gelu",
+            "skip": "identity",
+            "long_skip": "two_back"
+          },
+          {
+            "ff": 1,
+            "activation": "silu",
+            "skip": "identity",
+            "long_skip": "two_back"
+          }
+        ],
+        "residual_scale": 0.25,
+        "long_skip_scale": 0.25,
+        "input": "relative_spatial_phase_27_features",
+        "output": "centrohermitian_distortionless_projection",
+        "selection": "per_choice_argmax"
+      },
+      "family": "dense",
+      "space": {
+        "width": 384,
+        "max_depth": 16,
+        "depths": [
+          2,
+          4,
+          6,
+          8,
+          12,
+          16
+        ],
+        "ff_multipliers": [
+          1,
+          2,
+          4
+        ]
+      },
+      "parameters": 2912664,
+      "training_summary": {
+        "scope": "development_validation_only",
+        "best_epoch": 319,
+        "validation": {
+          "mse": 4.9471007514512166e-05,
+          "mean_sinr_gap_db": 0.22347053265052885,
+          "median_sinr_gap_db": 0.03822362109655586,
+          "p95_sinr_gap_db": 0.5282676288226866,
+          "by_k": {
+            "3": 0.01037705319304402,
+            "4": 0.02820647108738153,
+            "5": 0.07459859163883414,
+            "6": 0.1429277086310243,
+            "7": 0.31751923830813616,
+            "8": 0.7671941330447531
+          },
+          "max_abs_output_component": 0.46846023201942444,
+          "max_distortionless_residual": 1.4901161193847656e-07
+        },
+        "epochs": 320,
+        "weight_steps": 37760,
+        "architecture_steps": 0,
+        "training_seconds": 214.77903354819864,
+        "parameters": 2912664,
+        "architecture_parameters": 0,
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "peak_gpu_bytes": 575694848,
+        "checkpoint_sha256": "c6b78ba24c8f3e6ac251aa2d1237fa08af2bb43129dca05751d610b4c7626f35",
+        "from_scratch": true,
+        "test_accessed": false,
+        "selection_metric": "mean_sinr_gap_db",
+        "loss": "restored_physical_objective",
+        "last_checkpoint_sha256": "76b7f4a9fddd973fe1fa2c7daad8dbf88a25c52f91007d097f27fa6522ff1283"
+      },
+      "validation": {
+        "mse": 4.9471007514512166e-05,
+        "mean_sinr_gap_db": 0.22347053265052885,
+        "median_sinr_gap_db": 0.03822362109655586,
+        "p95_sinr_gap_db": 0.5282676288226866,
+        "by_k": {
+          "3": 0.01037705319304402,
+          "4": 0.02820647108738153,
+          "5": 0.07459859163883414,
+          "6": 0.1429277086310243,
+          "7": 0.31751923830813616,
+          "8": 0.7671941330447531
+        },
+        "max_abs_output_component": 0.46846023201942444,
+        "max_distortionless_residual": 1.4901161193847656e-07
+      },
+      "search_summary": {
+        "scope": "development_validation_only",
+        "best_epoch": 60,
+        "validation": {
+          "mse": 0.00012506768689490855,
+          "mean_sinr_gap_db": 0.41835317916159903,
+          "median_sinr_gap_db": 0.1450727839231547,
+          "p95_sinr_gap_db": 1.0477614500829973,
+          "by_k": {
+            "3": 0.06775799688644343,
+            "4": 0.11349145282403524,
+            "5": 0.20781664869581676,
+            "6": 0.3213525899405812,
+            "7": 0.5637675289431335,
+            "8": 1.2359328576795843
+          },
+          "max_abs_output_component": 0.44643449783325195,
+          "max_distortionless_residual": 1.2293457984924316e-07
+        },
+        "epochs": 60,
+        "weight_steps": 7080,
+        "architecture_steps": 6490,
+        "training_seconds": 641.4609662620351,
+        "parameters": 35566104,
+        "architecture_parameters": 178,
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "peak_gpu_bytes": 1381176320,
+        "checkpoint_sha256": "f25b77bc44870e987d5343517cbca8b7ccd9435c339f7d925c90ab44ff37ee52",
+        "from_scratch": false,
+        "test_accessed": false,
+        "selection_metric": "mean_sinr_gap_db",
+        "loss": "restored_physical_objective",
+        "last_checkpoint_sha256": "64a54d2860ac927619a886d3e1109f3d7aa3e8440a9f11b3397ae0194d370624",
+        "architecture_l2_change": 2.340251922607422,
+        "inherited_discrete_validation": {
+          "mse": 0.003975651226937771,
+          "mean_sinr_gap_db": 33.98312003976578,
+          "median_sinr_gap_db": 34.25655378666441,
+          "p95_sinr_gap_db": 40.799483233571216,
+          "by_k": {
+            "3": 30.976571072453837,
+            "4": 32.48704457183046,
+            "5": 33.66957124602421,
+            "6": 34.51779839931082,
+            "7": 35.45662070152611,
+            "8": 36.79111424744923
+          },
+          "max_abs_output_component": 1.3022410869598389,
+          "max_distortionless_residual": 6.332993507385254e-07
+        }
+      }
+    },
+    "fixed": {
+      "checkpoint": "runs/ch3_grid_v11/fixed/retrain/best.pt",
+      "checkpoint_sha256": "9e56125dea8e080b6ef810cf08ee5d3fa9351f3740ea5db4ccda4b5f94eadcf2",
+      "run": "runs/ch3_grid_v11/fixed",
+      "role": "fixed",
+      "genotype": {
+        "family": "fixed_dnnabf_modules",
+        "hidden_widths": [
+          2048,
+          1024,
+          1024,
+          1024
+        ],
+        "activation": "PReLU",
+        "selection": "fixed_before_training"
+      },
+      "family": "fixed_dnnabf_modules",
+      "space": {},
+      "parameters": 4726808,
+      "training_summary": {
+        "scope": "development_validation_only",
+        "best_epoch": 181,
+        "validation": {
+          "mse": 0.0002241705806227401,
+          "mean_sinr_gap_db": 1.5197068119843267,
+          "median_sinr_gap_db": 0.8297560231513081,
+          "p95_sinr_gap_db": 4.998179569792997,
+          "by_k": {
+            "3": 0.3497461448588865,
+            "4": 0.6362435040055693,
+            "5": 1.0306786764203058,
+            "6": 1.4142199732677467,
+            "7": 2.1148167625640726,
+            "8": 3.5725358107893794
+          },
+          "max_abs_output_component": 0.42894986271858215,
+          "max_distortionless_residual": 1.5842670109122992e-07
+        },
+        "epochs": 320,
+        "weight_steps": 37760,
+        "architecture_steps": 0,
+        "training_seconds": 148.01663419883698,
+        "parameters": 4726808,
+        "architecture_parameters": 0,
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "peak_gpu_bytes": 416574464,
+        "checkpoint_sha256": "9e56125dea8e080b6ef810cf08ee5d3fa9351f3740ea5db4ccda4b5f94eadcf2",
+        "from_scratch": true,
+        "test_accessed": false,
+        "selection_metric": "mean_sinr_gap_db",
+        "loss": "restored_physical_objective",
+        "last_checkpoint_sha256": "404d3738e8e718bebcc76d7a8eacde1e742f1d36b6849fdf5936d874d2717e62"
+      },
+      "validation": {
+        "mse": 0.0002241705806227401,
+        "mean_sinr_gap_db": 1.5197068119843267,
+        "median_sinr_gap_db": 0.8297560231513081,
+        "p95_sinr_gap_db": 4.998179569792997,
+        "by_k": {
+          "3": 0.3497461448588865,
+          "4": 0.6362435040055693,
+          "5": 1.0306786764203058,
+          "6": 1.4142199732677467,
+          "7": 2.1148167625640726,
+          "8": 3.5725358107893794
+        },
+        "max_abs_output_component": 0.42894986271858215,
+        "max_distortionless_residual": 1.5842670109122992e-07
+      }
+    },
+    "mse": {
+      "checkpoint": "runs/ch3_grid_v11/mse/retrain/best.pt",
+      "checkpoint_sha256": "054f763cce5293696255757d76eda7c77acde85ad079a615f9d11e5ca053bbd4",
+      "run": "runs/ch3_grid_v11/mse",
+      "role": "mse",
+      "genotype": {
+        "family": "residual_dense",
+        "width": 384,
+        "depth": 4,
+        "layers": [
+          {
+            "ff": 2,
+            "activation": "silu",
+            "skip": "linear",
+            "long_skip": "none"
+          },
+          {
+            "ff": 4,
+            "activation": "silu",
+            "skip": "identity",
+            "long_skip": "input"
+          },
+          {
+            "ff": 2,
+            "activation": "gelu",
+            "skip": "identity",
+            "long_skip": "two_back"
+          },
+          {
+            "ff": 1,
+            "activation": "silu",
+            "skip": "identity",
+            "long_skip": "two_back"
+          }
+        ],
+        "residual_scale": 0.25,
+        "long_skip_scale": 0.25,
+        "input": "relative_spatial_phase_27_features",
+        "output": "centrohermitian_distortionless_projection",
+        "selection": "per_choice_argmax"
+      },
+      "family": "dense",
+      "space": {
+        "width": 384,
+        "max_depth": 16,
+        "depths": [
+          2,
+          4,
+          6,
+          8,
+          12,
+          16
+        ],
+        "ff_multipliers": [
+          1,
+          2,
+          4
+        ]
+      },
+      "parameters": 2912664,
+      "training_summary": {
+        "scope": "development_validation_only",
+        "best_epoch": 316,
+        "validation": {
+          "mse": 2.9003540475969203e-05,
+          "mean_sinr_gap_db": 1.825989166065626,
+          "median_sinr_gap_db": 0.9665101029500178,
+          "p95_sinr_gap_db": 5.791456526985092,
+          "by_k": {
+            "3": 0.2669012483973663,
+            "4": 0.5664905016102003,
+            "5": 1.0201842510180246,
+            "6": 1.7125467728761437,
+            "7": 2.835540587216475,
+            "8": 4.554271635275548
+          },
+          "max_abs_output_component": 0.45570412278175354,
+          "max_distortionless_residual": 1.5832483768463135e-07
+        },
+        "epochs": 320,
+        "weight_steps": 37760,
+        "architecture_steps": 0,
+        "training_seconds": 179.24585504084826,
+        "parameters": 2912664,
+        "architecture_parameters": 0,
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "peak_gpu_bytes": 382775296,
+        "checkpoint_sha256": "054f763cce5293696255757d76eda7c77acde85ad079a615f9d11e5ca053bbd4",
+        "from_scratch": true,
+        "test_accessed": false,
+        "selection_metric": "mean_sinr_gap_db",
+        "loss": "population_component_mse",
+        "last_checkpoint_sha256": "d17d8e50f0caac58c40d5fc1adcf05dadd9a9e1f017663aba8080fa8aba7167a"
+      },
+      "validation": {
+        "mse": 2.9003540475969203e-05,
+        "mean_sinr_gap_db": 1.825989166065626,
+        "median_sinr_gap_db": 0.9665101029500178,
+        "p95_sinr_gap_db": 5.791456526985092,
+        "by_k": {
+          "3": 0.2669012483973663,
+          "4": 0.5664905016102003,
+          "5": 1.0201842510180246,
+          "6": 1.7125467728761437,
+          "7": 2.835540587216475,
+          "8": 4.554271635275548
+        },
+        "max_abs_output_component": 0.45570412278175354,
+        "max_distortionless_residual": 1.5832483768463135e-07
+      }
+    },
+    "random": {
+      "checkpoint": "runs/ch3_grid_v11/random/retrain/best.pt",
+      "checkpoint_sha256": "db0dd89f71b5aacae7648ad89915061a029dad463ce07c268b2eb138f4478a7d",
+      "run": "runs/ch3_grid_v11/random",
+      "role": "random",
+      "genotype": {
+        "depth": 8,
+        "layers": [
+          {
+            "ff": 2,
+            "long_skip": "none",
+            "activation": "silu",
+            "skip": "identity"
+          },
+          {
+            "ff": 1,
+            "long_skip": "input",
+            "activation": "tanh",
+            "skip": "linear"
+          },
+          {
+            "ff": 2,
+            "long_skip": "none",
+            "activation": "silu",
+            "skip": "identity"
+          },
+          {
+            "ff": 1,
+            "long_skip": "input",
+            "activation": "silu",
+            "skip": "identity"
+          },
+          {
+            "ff": 2,
+            "long_skip": "input",
+            "activation": "tanh",
+            "skip": "linear"
+          },
+          {
+            "ff": 1,
+            "long_skip": "none",
+            "activation": "gelu",
+            "skip": "linear"
+          },
+          {
+            "ff": 2,
+            "long_skip": "input",
+            "activation": "silu",
+            "skip": "identity"
+          },
+          {
+            "ff": 4,
+            "long_skip": "two_back",
+            "activation": "silu",
+            "skip": "identity"
+          }
+        ],
+        "selection": "one_random_draw_before_training",
+        "architecture_seed": 9117
+      },
+      "family": "dense",
+      "space": {
+        "width": 384,
+        "max_depth": 16,
+        "depths": [
+          2,
+          4,
+          6,
+          8,
+          12,
+          16
+        ],
+        "ff_multipliers": [
+          1,
+          2,
+          4
+        ]
+      },
+      "parameters": 4983960,
+      "training_summary": {
+        "scope": "development_validation_only",
+        "best_epoch": 315,
+        "validation": {
+          "mse": 3.717283470905386e-05,
+          "mean_sinr_gap_db": 0.18510029488853671,
+          "median_sinr_gap_db": 0.019054231547894318,
+          "p95_sinr_gap_db": 0.33769156201365313,
+          "by_k": {
+            "3": 0.004387385962055127,
+            "4": 0.016077397651812562,
+            "5": 0.04945142724970275,
+            "6": 0.10359551291868008,
+            "7": 0.2544338895834561,
+            "8": 0.6826561559655138
+          },
+          "max_abs_output_component": 0.48497897386550903,
+          "max_distortionless_residual": 1.341104508556512e-07
+        },
+        "epochs": 320,
+        "weight_steps": 37760,
+        "architecture_steps": 0,
+        "training_seconds": 322.6049559013918,
+        "parameters": 4983960,
+        "architecture_parameters": 0,
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "peak_gpu_bytes": 429336064,
+        "checkpoint_sha256": "db0dd89f71b5aacae7648ad89915061a029dad463ce07c268b2eb138f4478a7d",
+        "from_scratch": true,
+        "test_accessed": false,
+        "selection_metric": "mean_sinr_gap_db",
+        "loss": "restored_physical_objective",
+        "last_checkpoint_sha256": "43c8f483e01e90b25274b717f6d4e7dd8b4bf7a0589a362c8c8b6128a12a2f73"
+      },
+      "validation": {
+        "mse": 3.717283470905386e-05,
+        "mean_sinr_gap_db": 0.18510029488853671,
+        "median_sinr_gap_db": 0.019054231547894318,
+        "p95_sinr_gap_db": 0.33769156201365313,
+        "by_k": {
+          "3": 0.004387385962055127,
+          "4": 0.016077397651812562,
+          "5": 0.04945142724970275,
+          "6": 0.10359551291868008,
+          "7": 0.2544338895834561,
+          "8": 0.6826561559655138
+        },
+        "max_abs_output_component": 0.48497897386550903,
+        "max_distortionless_residual": 1.341104508556512e-07
+      }
+    },
+    "strict_DNNABF": {
+      "kind": "strict_DNNABF_by_K",
+      "role": "strict_DNNABF",
+      "checkpoint": "runs/ch3_grid_v11/strict_DNNABF/summary.json",
+      "checkpoint_sha256": "751a86ff097f872c6010c39630d550e39b0b2eb196a0a695751c368d80109bb5",
+      "checkpoints": {
+        "3": {
+          "path": "runs/ch3_grid_v11/strict_DNNABF/K3/best.pt",
+          "sha256": "8e915b84469560dc96f24a1457c5b807f1d1c8655387af09eb4162b3cc749396"
+        },
+        "4": {
+          "path": "runs/ch3_grid_v11/strict_DNNABF/K4/best.pt",
+          "sha256": "9d589e00245bea41c0aca64f334b8b973b5a38689b716b625b979d81f0b8b720"
+        },
+        "5": {
+          "path": "runs/ch3_grid_v11/strict_DNNABF/K5/best.pt",
+          "sha256": "c18ec41e45fa99b3d88cd6b64cc19e72df0c62a7b555655963cc6a580e701fb6"
+        },
+        "6": {
+          "path": "runs/ch3_grid_v11/strict_DNNABF/K6/best.pt",
+          "sha256": "18ff81b310c3d8fd2018c58377f4c5bad14913dbe6f032a4935fa352410c2e48"
+        },
+        "7": {
+          "path": "runs/ch3_grid_v11/strict_DNNABF/K7/best.pt",
+          "sha256": "02d0e15f5d1bfc7bf4919248f621ba7c2aac204edbcabcbfe412aecf2c1ece5e"
+        },
+        "8": {
+          "path": "runs/ch3_grid_v11/strict_DNNABF/K8/best.pt",
+          "sha256": "398b3b8866836bda70aa705bfd71ea6588a366c0552db7c316cef4b4eea948cb"
+        }
+      },
+      "parameters_by_k": {
+        "3": 4237336,
+        "4": 4239384,
+        "5": 4241432,
+        "6": 4243480,
+        "7": 4245528,
+        "8": 4247576
+      },
+      "training_summary": {
+        "complete": true,
+        "protocol": {
+          "id": "ch3_v11_original_form_DNNABF_control",
+          "scope": "Original AOA/PReLU/tanh/MSE form on the new good-only dataset; training budget and unspecified optimizer details are declared reconstruction choices, not recovered historical settings.",
+          "seed": 117,
+          "fixed_widths": [
+            2048,
+            1024,
+            1024,
+            1024
+          ],
+          "input_initial_weight_scale": 0.011111111111111112,
+          "input": "K+1 raw degree-valued AOAs; one fixed network per K, no padding, phase features or output projection",
+          "output": "24 real components with tanh",
+          "labels": "Unscaled stored sample-MVDR labels from 1024 interference-plus-noise snapshots; no label clipping or normalization",
+          "selection": "minimum selection-validation component MSE per K",
+          "training": {
+            "epochs": 320,
+            "batch_size": 512,
+            "learning_rate": 0.001,
+            "weight_decay": 0,
+            "grad_clip": 5,
+            "optimizer": "Adam",
+            "cosine_min_lr": 1e-05
+          },
+          "conditioning": "First-layer initialization and learning rate multiplied by 1/90 to condition raw degree units; forward input stays raw AOA. Same established strict baseline helper, not a new input feature.",
+          "test_accessed": false
+        },
+        "source_hashes": {
+          "ch3_strict_baseline.py": "98081eb9077f27efe184508a033fdbe059e617ba27abb56305779eb91baeb077",
+          "configs/ch3_strict_baseline_v11.json": "ea356092f3d2c56ad28a18689324e5cd625483f2d16daf492eced0549ed15a5b",
+          "run_strict_dnnabf.py": "8827aa75e8a8d04d4e85bebc0659c50f0e079718ee4abc287d816456195cd1e4",
+          "beamnas/data.py": "da763138f4ce1249bde49bb23fdf89923b9f869f226f6cd375d471f4dfa99e41",
+          "beamnas/dnnabf_reference.py": "ef5bb3c2b05d36a397b5eea9c0af304a9b4f319aa1914ea5f160e4e7facc30ff",
+          "beamnas/common.py": "1b98e1eff4faf0da6caa080ad429687309964ce72637c49383fda00f30f38f27",
+          "beamnas/pointing.py": "e99d358034366a40a708cb0fb7d507658fd21d1c6b0e72b9189942d577fb0eaf",
+          "beamnas/dense_search.py": "ac756167d0df1be268e46f7d7f61b5a60c5d3aaa41d80295712de40e8f80d300",
+          "beamnas/train.py": "69da6752d1952932026d221748d1be8ba88f4971db89f18a431ca693723e8e0a",
+          "beamnas/pointing_boundary.py": "d3752796e5e0f0134bcca01b0e9b1ee95198beb5b4095284c5f1c32621837a48",
+          "beamnas/original_modules.py": "5aa47bb943402ade87441f76a21222c11cbeaf50d7cdfe6abe49fab654666e53",
+          "beamnas/restored_objective.py": "7fe4b9eba32afc0fae78b2b1761e1d4bfaebdf7ab0512e161f21e0f0bc1e3abb",
+          "beamnas/model.py": "8b17578c3a072a1886631de07a4e261d5b56795f1b4a03864f39daf191da6cb3",
+          "beamnas/refined.py": "4182d27a16fa8f7b2fe74661fdbf14699ce542ece0324a9db55265a4642c67d8",
+          "beamnas/pooled_modules.py": "34705f0256b183345561a93e452ae9c9ad29f540fb9cf47e73d82d153e008721",
+          "beamnas/__init__.py": "e2ba4e885c2558a536dfe29beaed1a057146c62000185d9716ec255934288b12",
+          "beamnas/evaluate.py": "5039a5f4b996c50ac0eae31fe05c2772871a86b5d354b3518517f4220255f844",
+          "beamnas/strict_dnnabf.py": "381a0d9477a3daa34fb13b40efa9feed55b5d636e05f4b6ecd1832ff4fe486b9",
+          "beamnas/original_physical_loss.py": "4b61c5e71939bc103f3eb6e5fba8b0d3bcf8160cb524386d5e362f9f46eb4d22"
+        },
+        "data_manifest_sha256": "2e04f62e0210a95c7d68442fddb87496b553a2c346de3a69517c07d30f1a43ae",
+        "by_k": {
+          "3": {
+            "scope": "development_selection_validation_only",
+            "best_mse": 0.0002364673127885908,
+            "best_epoch": 320,
+            "epochs": 320,
+            "steps": 6400,
+            "parameters": 4237336,
+            "training_seconds": 19.011280177161098,
+            "checkpoint_sha256": "8e915b84469560dc96f24a1457c5b807f1d1c8655387af09eb4162b3cc749396",
+            "peak_allocated_gpu_bytes": 156267520,
+            "from_scratch": true,
+            "validation": {
+              "mse": 0.0002364673127885908,
+              "mean_sinr_gap_db": 19.437632938937057,
+              "p95_sinr_gap_db": 24.89718091601917,
+              "max_abs_output_component": 0.13865667581558228,
+              "zero_weight_rows": 0
+            },
+            "checkpoint_reload_verified": true
+          },
+          "4": {
+            "scope": "development_selection_validation_only",
+            "best_mse": 0.0003008763014804572,
+            "best_epoch": 281,
+            "epochs": 320,
+            "steps": 6400,
+            "parameters": 4239384,
+            "training_seconds": 19.108853606507182,
+            "checkpoint_sha256": "9d589e00245bea41c0aca64f334b8b973b5a38689b716b625b979d81f0b8b720",
+            "peak_allocated_gpu_bytes": 208628224,
+            "from_scratch": true,
+            "validation": {
+              "mse": 0.0003008763014804572,
+              "mean_sinr_gap_db": 21.931146851610333,
+              "p95_sinr_gap_db": 27.136459338161536,
+              "max_abs_output_component": 0.3794604539871216,
+              "zero_weight_rows": 0
+            },
+            "checkpoint_reload_verified": true
+          },
+          "5": {
+            "scope": "development_selection_validation_only",
+            "best_mse": 0.0003696083149407059,
+            "best_epoch": 293,
+            "epochs": 320,
+            "steps": 6400,
+            "parameters": 4241432,
+            "training_seconds": 18.76239436864853,
+            "checkpoint_sha256": "c18ec41e45fa99b3d88cd6b64cc19e72df0c62a7b555655963cc6a580e701fb6",
+            "peak_allocated_gpu_bytes": 260211200,
+            "from_scratch": true,
+            "validation": {
+              "mse": 0.0003696083149407059,
+              "mean_sinr_gap_db": 23.32759331265061,
+              "p95_sinr_gap_db": 28.497213658104272,
+              "max_abs_output_component": 0.31129005551338196,
+              "zero_weight_rows": 0
+            },
+            "checkpoint_reload_verified": true
+          },
+          "6": {
+            "scope": "development_selection_validation_only",
+            "best_mse": 0.00042536520049907267,
+            "best_epoch": 192,
+            "epochs": 320,
+            "steps": 6400,
+            "parameters": 4243480,
+            "training_seconds": 18.61120531708002,
+            "checkpoint_sha256": "18ff81b310c3d8fd2018c58377f4c5bad14913dbe6f032a4935fa352410c2e48",
+            "peak_allocated_gpu_bytes": 310861824,
+            "from_scratch": true,
+            "validation": {
+              "mse": 0.00042536520049907267,
+              "mean_sinr_gap_db": 24.292959706825656,
+              "p95_sinr_gap_db": 29.761561861611,
+              "max_abs_output_component": 0.4264833331108093,
+              "zero_weight_rows": 0
+            },
+            "checkpoint_reload_verified": true
+          },
+          "7": {
+            "scope": "development_selection_validation_only",
+            "best_mse": 0.0006321913097053766,
+            "best_epoch": 161,
+            "epochs": 320,
+            "steps": 6400,
+            "parameters": 4245528,
+            "training_seconds": 18.53031961992383,
+            "checkpoint_sha256": "02d0e15f5d1bfc7bf4919248f621ba7c2aac204edbcabcbfe412aecf2c1ece5e",
+            "peak_allocated_gpu_bytes": 209328128,
+            "from_scratch": true,
+            "validation": {
+              "mse": 0.0006321913097053766,
+              "mean_sinr_gap_db": 25.08635353172115,
+              "p95_sinr_gap_db": 31.608994919256926,
+              "max_abs_output_component": 0.42608749866485596,
+              "zero_weight_rows": 0
+            },
+            "checkpoint_reload_verified": true
+          },
+          "8": {
+            "scope": "development_selection_validation_only",
+            "best_mse": 0.0009255839977413416,
+            "best_epoch": 149,
+            "epochs": 320,
+            "steps": 6400,
+            "parameters": 4247576,
+            "training_seconds": 18.760697402060032,
+            "checkpoint_sha256": "398b3b8866836bda70aa705bfd71ea6588a366c0552db7c316cef4b4eea948cb",
+            "peak_allocated_gpu_bytes": 259644416,
+            "from_scratch": true,
+            "validation": {
+              "mse": 0.0009255839977413416,
+              "mean_sinr_gap_db": 26.64190633193402,
+              "p95_sinr_gap_db": 34.45033643922938,
+              "max_abs_output_component": 0.47417598962783813,
+              "zero_weight_rows": 0
+            },
+            "checkpoint_reload_verified": true
+          }
+        },
+        "test_accessed": false,
+        "total_training_seconds": 114.47162339277565
+      },
+      "genotype": {
+        "widths": [
+          2048,
+          1024,
+          1024,
+          1024
+        ],
+        "activation": "PReLU",
+        "output": "tanh",
+        "input": "raw_K_plus_1_AOA"
+      }
+    }
+  },
+  "data": "data/ch3_grid_good_v11",
+  "data_manifest_sha256": "2e04f62e0210a95c7d68442fddb87496b553a2c346de3a69517c07d30f1a43ae",
+  "source_hashes": {
+    "evaluate_ch3_reconstruction.py": "1515b886d2cee2a43045459cf4c068644a502d895c00272a74a8b5e82126fc6a",
+    "original_array_evaluation.py": "af3b34e0f8c0f6e54f93ee743213480cf6e96efd4657fb84eb8578bf192819dd",
+    "evaluate_restored_holdout.py": "c408ca456f28c07d27f338f92a5ac388e4e2cc9e71323352d51c6c194be16a7f",
+    "freeze_restored_candidates.py": "849f13aba62232b95f6170247f5bff369204f56587f418aeaaba0e16df6f93ec",
+    "benchmark_restored_latency.py": "3b0432772141785414047d94638118efc7773358b3390911e16fb6df68410fda",
+    "benchmark_ch3_latency.py": "c534f81121cb53b64a280093790ddb425fd7d2302883fcfeb6c7847be75d3e40",
+    "ch3_strict_baseline.py": "98081eb9077f27efe184508a033fdbe059e617ba27abb56305779eb91baeb077",
+    "beamnas/data.py": "da763138f4ce1249bde49bb23fdf89923b9f869f226f6cd375d471f4dfa99e41",
+    "beamnas/dnnabf_reference.py": "ef5bb3c2b05d36a397b5eea9c0af304a9b4f319aa1914ea5f160e4e7facc30ff",
+    "beamnas/common.py": "1b98e1eff4faf0da6caa080ad429687309964ce72637c49383fda00f30f38f27",
+    "beamnas/pointing.py": "e99d358034366a40a708cb0fb7d507658fd21d1c6b0e72b9189942d577fb0eaf",
+    "beamnas/dense_search.py": "ac756167d0df1be268e46f7d7f61b5a60c5d3aaa41d80295712de40e8f80d300",
+    "beamnas/train.py": "69da6752d1952932026d221748d1be8ba88f4971db89f18a431ca693723e8e0a",
+    "beamnas/pointing_boundary.py": "d3752796e5e0f0134bcca01b0e9b1ee95198beb5b4095284c5f1c32621837a48",
+    "beamnas/original_modules.py": "5aa47bb943402ade87441f76a21222c11cbeaf50d7cdfe6abe49fab654666e53",
+    "beamnas/restored_objective.py": "7fe4b9eba32afc0fae78b2b1761e1d4bfaebdf7ab0512e161f21e0f0bc1e3abb",
+    "beamnas/model.py": "8b17578c3a072a1886631de07a4e261d5b56795f1b4a03864f39daf191da6cb3",
+    "beamnas/refined.py": "4182d27a16fa8f7b2fe74661fdbf14699ce542ece0324a9db55265a4642c67d8",
+    "beamnas/pooled_modules.py": "34705f0256b183345561a93e452ae9c9ad29f540fb9cf47e73d82d153e008721",
+    "beamnas/__init__.py": "e2ba4e885c2558a536dfe29beaed1a057146c62000185d9716ec255934288b12",
+    "beamnas/evaluate.py": "5039a5f4b996c50ac0eae31fe05c2772871a86b5d354b3518517f4220255f844",
+    "beamnas/strict_dnnabf.py": "381a0d9477a3daa34fb13b40efa9feed55b5d636e05f4b6ecd1832ff4fe486b9",
+    "beamnas/original_physical_loss.py": "4b61c5e71939bc103f3eb6e5fba8b0d3bcf8160cb524386d5e362f9f46eb4d22"
+  },
+  "source_snapshot_root": "runs/ch3_grid_v11/test/source_snapshot",
+  "time": "2026-10-08T04:08:35.266901+00:00",
+  "split": "test",
+  "frozen_before_loading_evaluation_split": true,
+  "protocol": {
+    "id": "chapter3_structured_grid_good_only_v11",
+    "paper_scene": {
+      "desired_deg": 18,
+      "interference_deg": [
+        -32,
+        -20,
+        -14,
+        -4,
+        7,
+        25,
+        36,
+        58
+      ]
+    },
+    "generation": {
+      "rule": "Deterministic combinatorial enumeration on the published integer-degree angular grid, with declared separations derived from the published example. This is a new reconstruction, not recovered historical data generation code.",
+      "angle_min_deg": -90,
+      "angle_max_deg": 90,
+      "step_deg": 1,
+      "minimum_desired_interference_separation_deg": 7,
+      "minimum_any_source_separation_deg": 6,
+      "interferers": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "ordering": "Cycle desired angles and K; use a coprime stride through lexicographic combination ranks. Interferer spacing is enforced by compressed-index unranking. No random AOA draws.",
+      "counts": {
+        "train": 60000,
+        "architecture_validation": 12000,
+        "selection_validation": 6000,
+        "test": 12000
+      },
+      "split_group": "desired angle; all scenes at the same desired angle stay in the same split",
+      "split_residues_mod_10": {
+        "train": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "architecture_validation": [
+          6,
+          7
+        ],
+        "selection_validation": [
+          8
+        ],
+        "test": [
+          9
+        ]
+      },
+      "exclude_prior_neural_and_diagnostic_scenes": true,
+      "bad_fraction": 0,
+      "candidate_batch_size": 8192,
+      "maximum_candidates": 3000000,
+      "ordering_seed": 2026100841,
+      "snapshot_seed": 2026100842
+    },
+    "physics": {
+      "antennas": 12,
+      "spacing_wavelengths": 0.5,
+      "snr_db": 10,
+      "inr_db": 30,
+      "noise_variance": 1,
+      "snapshots": 1024,
+      "steering": "positive_phase_unit_element_magnitude"
+    },
+    "quality": {
+      "reference": "population interference-plus-noise MVDR evaluated before neural training",
+      "main_error_deg_max": 0.5,
+      "null_mean_error_deg_max": 0.1,
+      "sinr_db_min": 10,
+      "main_rule": "Nearest local power peak including one-sided endpoint maxima on a 0.1-degree scan; endpoint compared to adjacent scan sample.",
+      "null_rule": "One-to-one minimum-total-distance matching to interior minima on a 0.001-degree scan, with analytic derivative verification; missing minima fail.",
+      "scope": "Apply identical Oracle-only eligibility to all splits. Retain rejection records; no filtering on neural results. Nulls need not be computed for scenes already rejected by main error or SINR; mark these as not evaluated."
+    },
+    "search": {
+      "family": "dense",
+      "width": 384,
+      "max_depth": 16,
+      "depths": [
+        2,
+        4,
+        6,
+        8,
+        12,
+        16
+      ],
+      "ff_multipliers": [
+        1,
+        2,
+        4
+      ],
+      "epochs": 60,
+      "warmup_epochs": 5,
+      "batch_size": 512,
+      "seed": 117,
+      "architecture_lr": 0.0003,
+      "alternation": "one weight step and one architecture-validation step after warmup"
+    },
+    "training": {
+      "epochs": 320,
+      "batch_size": 512,
+      "seed": 117,
+      "from_scratch": true,
+      "checkpoint_selection": "minimum selection-validation mean SINR gap",
+      "optimizer": {
+        "name": "AdamW",
+        "lr": 0.001,
+        "weight_decay": 1e-05,
+        "cosine_min_lr": 1e-05,
+        "gradient_clip": 5
+      },
+      "loss": "restored physical objective; matched population-component-MSE control"
+    },
+    "controls": [
+      "fixed DNNABF hidden widths with identical added input/output modules and physical loss",
+      "same searched genotype with population-component MSE",
+      "one predeclared random architecture with physical loss"
+    ],
+    "acceptance": {
+      "mean_gap_db_max": 0.5,
+      "each_k_mean_gap_db_max": 1.0,
+      "p95_gap_db_max": 3.0,
+      "main_MAE_difference_vs_population_MVDR_max_deg": 0.1
+    },
+    "test_policy": "Freeze all model checkpoints and evaluator sources before any neural test prediction. The Oracle-filtered test is generated with the dataset; no training or selection reads its file. Include all frozen controls and every test scene.",
+    "metrics": [
+      "SINR overall and by K",
+      "nearest-local-peak absolute direction error",
+      "global-peak error",
+      "paired NN-versus-Oracle peak difference",
+      "null errors and missing minima",
+      "component MSE and NMSE",
+      "model architecture and parameters",
+      "search/retrain costs",
+      "matched CPU/GPU batch-one latency"
+    ],
+    "latency": {
+      "devices": [
+        "cpu",
+        "cuda"
+      ],
+      "cpu_threads": 4,
+      "batch_size": 1,
+      "scenes_per_k": 10,
+      "passes": 10,
+      "warmup_calls_per_method": 50,
+      "order_seed": 2026100843
+    },
+    "scope_note": "Reference-qualified, separated-angle reconstruction. Report eligibility counts. It does not reproduce the unspecified historical random-AOA distribution; no claim of unrestricted performance or DARTS superiority without matched evidence."
+  }
+}

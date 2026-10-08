@@ -1,0 +1,185 @@
+{
+  "summary": {
+    "cpu": {
+      "population_covariance_given": {
+        "mean_ms": 0.06685961333333333,
+        "median_ms": 0.0663315,
+        "p95_ms": 0.0935293,
+        "observations": 600
+      },
+      "population_AOA_to_weights": {
+        "mean_ms": 0.26727966166666667,
+        "median_ms": 0.2608785,
+        "p95_ms": 0.31543249999999995,
+        "observations": 600
+      },
+      "sample_snapshots_given": {
+        "mean_ms": 0.15421674000000002,
+        "median_ms": 0.14976699999999998,
+        "p95_ms": 0.19495059999999995,
+        "observations": 600
+      },
+      "candidate": {
+        "mean_ms": 1.0641579833333332,
+        "median_ms": 1.082641,
+        "p95_ms": 1.1596866499999998,
+        "observations": 600
+      },
+      "fixed": {
+        "mean_ms": 1.2054984366666668,
+        "median_ms": 1.2619095,
+        "p95_ms": 1.34265625,
+        "observations": 600
+      },
+      "mse": {
+        "mean_ms": 1.09916595,
+        "median_ms": 1.1271965000000002,
+        "p95_ms": 1.2294584,
+        "observations": 600
+      },
+      "random": {
+        "mean_ms": 1.8101663616666668,
+        "median_ms": 1.8391275,
+        "p95_ms": 1.9542649499999998,
+        "observations": 600
+      },
+      "strict_DNNABF": {
+        "mean_ms": 1.0501816583333332,
+        "median_ms": 1.038086,
+        "p95_ms": 1.1557357499999998,
+        "observations": 600
+      }
+    },
+    "cuda": {
+      "population_covariance_given": {
+        "mean_ms": 0.18263003166666666,
+        "median_ms": 0.1823955,
+        "p95_ms": 0.1891408,
+        "observations": 600
+      },
+      "population_AOA_to_weights": {
+        "mean_ms": 0.6322140516666667,
+        "median_ms": 0.628694,
+        "p95_ms": 0.66183025,
+        "observations": 600
+      },
+      "sample_snapshots_given": {
+        "mean_ms": 0.27471548833333337,
+        "median_ms": 0.273062,
+        "p95_ms": 0.28112695,
+        "observations": 600
+      },
+      "candidate": {
+        "mean_ms": 1.5730581083333335,
+        "median_ms": 1.5666229999999999,
+        "p95_ms": 1.60865765,
+        "observations": 600
+      },
+      "fixed": {
+        "mean_ms": 0.9754292816666666,
+        "median_ms": 0.970251,
+        "p95_ms": 1.0049439,
+        "observations": 600
+      },
+      "mse": {
+        "mean_ms": 1.5741082766666668,
+        "median_ms": 1.5662255,
+        "p95_ms": 1.6164078,
+        "observations": 600
+      },
+      "random": {
+        "mean_ms": 2.4475329333333335,
+        "median_ms": 2.4324955,
+        "p95_ms": 2.5220749,
+        "observations": 600
+      },
+      "strict_DNNABF": {
+        "mean_ms": 0.5141560933333333,
+        "median_ms": 0.511452,
+        "p95_ms": 0.5438246499999999,
+        "observations": 600
+      }
+    }
+  },
+  "config": {
+    "devices": [
+      "cpu",
+      "cuda"
+    ],
+    "cpu_threads": 4,
+    "batch_size": 1,
+    "scenes_per_k": 10,
+    "passes": 10,
+    "warmup_calls_per_method": 50,
+    "order_seed": 2026100843
+  },
+  "test_scene_indices": [
+    2,
+    5,
+    14,
+    23,
+    25,
+    45,
+    48,
+    58,
+    63,
+    64,
+    3,
+    6,
+    8,
+    11,
+    13,
+    20,
+    21,
+    26,
+    27,
+    31,
+    16,
+    18,
+    38,
+    44,
+    46,
+    75,
+    77,
+    93,
+    96,
+    97,
+    4,
+    7,
+    15,
+    28,
+    30,
+    35,
+    37,
+    40,
+    41,
+    42,
+    9,
+    19,
+    22,
+    24,
+    39,
+    47,
+    52,
+    53,
+    57,
+    65,
+    0,
+    1,
+    10,
+    12,
+    17,
+    29,
+    32,
+    34,
+    51,
+    55
+  ],
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "GPU": "NVIDIA GeForce RTX 4090",
+  "platform": "Linux-6.17.0-41-generic-x86_64-with-glibc2.42",
+  "snapshot_seed": 2026100823,
+  "precision": "FP32 neural core; FP64 phase rotation, covariance and MVDR",
+  "no_other_GPU_compute_process_at_start_and_end": true
+}

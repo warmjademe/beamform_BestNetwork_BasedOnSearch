@@ -1,0 +1,65 @@
+{
+  "candidate_test_passes_predeclared_MVDR_proximity": true,
+  "test_scenes": 12000,
+  "scenes_by_K": {
+    "3": 2000,
+    "4": 2000,
+    "5": 2000,
+    "6": 2000,
+    "7": 2000,
+    "8": 2000
+  },
+  "sinr_gap_mean_db": 0.20234077136551673,
+  "sinr_gap_p95_db": 0.5466166701874038,
+  "sinr_gap_by_K": {
+    "3": 0.011798829550660332,
+    "4": 0.03640314031377758,
+    "5": 0.0627573549910972,
+    "6": 0.13277423183759327,
+    "7": 0.2800074892637275,
+    "8": 0.6903035822362443
+  },
+  "candidate_vs_Oracle_peak_difference_mean_deg": 0.12050833333333344,
+  "paper_main_table_reproduced": false,
+  "new_main_MAE_by_K": {
+    "3": 0.16194999999999984,
+    "4": 0.18450000000000016,
+    "5": 0.20944999999999994,
+    "6": 0.22510000000000005,
+    "7": 0.24764999999999993,
+    "8": 0.28064999999999996
+  },
+  "paper_main_MAE_by_K": {
+    "3": 0.021,
+    "4": 0.075,
+    "5": 0.064,
+    "6": 0.063,
+    "7": 0.078,
+    "8": 0.067
+  },
+  "new_null_MAE_by_K": {
+    "3": 0.17706100000000008,
+    "4": 0.26474125000000004,
+    "5": 0.35086360000000005,
+    "6": 0.43659966666666666,
+    "7": 0.8046378571428572,
+    "8": 0.94598825
+  },
+  "new_main_and_null_lower_than_matched_fixed_backbone_every_K": true,
+  "primary_timing_scope": "same AOA input to weight output, batch one; includes feature/covariance construction",
+  "CPU_speedup_MVDR_over_NN": 0.25116539635350826,
+  "GPU_speedup_MVDR_over_NN": 0.40190127009135224,
+  "CPU_NN_ms": 1.0641579833333332,
+  "CPU_MVDR_ms": 0.26727966166666667,
+  "GPU_NN_ms": 1.5730581083333335,
+  "GPU_MVDR_ms": 0.6322140516666667,
+  "paper_9p7_speedup_reproduced": false,
+  "candidate_better_than_random_accuracy": false,
+  "raw_AOA_tanh_MSE_DNNABF_performance_reproduced": false,
+  "scope": "New separated-AOA, Oracle-good experiment with residual dense architecture and physical objective, not the historical Transformer/MSE setup. Faster inference than MVDR is not demonstrated.",
+  "validated_local_copies": true,
+  "primary_timing_device": "cuda",
+  "primary_timing_hardware": "NVIDIA GeForce RTX 4090",
+  "primary_NN_slowdown_vs_MVDR": 2.4881732764186086,
+  "inference_execution": "PyTorch eager; CUDA synchronization before and after; data resident on device; batch 1"
+}

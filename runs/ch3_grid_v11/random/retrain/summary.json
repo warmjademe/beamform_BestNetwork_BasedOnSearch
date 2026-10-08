@@ -1,0 +1,34 @@
+{
+  "scope": "development_validation_only",
+  "best_epoch": 315,
+  "validation": {
+    "mse": 3.717283470905386e-05,
+    "mean_sinr_gap_db": 0.18510029488853671,
+    "median_sinr_gap_db": 0.019054231547894318,
+    "p95_sinr_gap_db": 0.33769156201365313,
+    "by_k": {
+      "3": 0.004387385962055127,
+      "4": 0.016077397651812562,
+      "5": 0.04945142724970275,
+      "6": 0.10359551291868008,
+      "7": 0.2544338895834561,
+      "8": 0.6826561559655138
+    },
+    "max_abs_output_component": 0.48497897386550903,
+    "max_distortionless_residual": 1.341104508556512e-07
+  },
+  "epochs": 320,
+  "weight_steps": 37760,
+  "architecture_steps": 0,
+  "training_seconds": 322.6049559013918,
+  "parameters": 4983960,
+  "architecture_parameters": 0,
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "peak_gpu_bytes": 429336064,
+  "checkpoint_sha256": "db0dd89f71b5aacae7648ad89915061a029dad463ce07c268b2eb138f4478a7d",
+  "from_scratch": true,
+  "test_accessed": false,
+  "selection_metric": "mean_sinr_gap_db",
+  "loss": "restored_physical_objective",
+  "last_checkpoint_sha256": "43c8f483e01e90b25274b717f6d4e7dd8b4bf7a0589a362c8c8b6128a12a2f73"
+}

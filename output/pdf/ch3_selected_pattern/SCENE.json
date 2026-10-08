@@ -1,0 +1,222 @@
+{
+  "selection_rule": {
+    "mode": "post_test_showcase_selected_at_user_request",
+    "test_scenes": 12000,
+    "K8_scenes": 2000,
+    "eligible_scenes": 523,
+    "eligibility": {
+      "interferers": 8,
+      "abs_desired_AOA_max_deg": 60,
+      "ours_main_error_max_deg": 0.1,
+      "ours_main_error_not_greater_than": [
+        "MVDR",
+        "DNNABF reconstruction"
+      ]
+    },
+    "ranking": "Smallest MVDR-minus-ours SINR gap; tie broken by original test index",
+    "top_candidates": [
+      {
+        "test_index": 1110,
+        "sinr_gap_db": 0.01700398465272457
+      },
+      {
+        "test_index": 4804,
+        "sinr_gap_db": 0.02074704127982585
+      },
+      {
+        "test_index": 7630,
+        "sinr_gap_db": 0.02214967763265463
+      },
+      {
+        "test_index": 3348,
+        "sinr_gap_db": 0.022506041044131564
+      },
+      {
+        "test_index": 9122,
+        "sinr_gap_db": 0.02515129048452991
+      },
+      {
+        "test_index": 460,
+        "sinr_gap_db": 0.02697625091453304
+      },
+      {
+        "test_index": 9892,
+        "sinr_gap_db": 0.02708591976491448
+      },
+      {
+        "test_index": 3689,
+        "sinr_gap_db": 0.02752626379111689
+      },
+      {
+        "test_index": 726,
+        "sinr_gap_db": 0.029330642662372952
+      },
+      {
+        "test_index": 11560,
+        "sinr_gap_db": 0.029448851132244158
+      }
+    ],
+    "interpretation": "Selected favorable illustration, not representative sampling or independent evidence of overall performance; aggregate test results unchanged."
+  },
+  "test_index": 1110,
+  "desired_deg": -11.0,
+  "interference_deg": [
+    -62.0,
+    -46.0,
+    -26.0,
+    11.0,
+    24.0,
+    31.0,
+    51.0,
+    65.0
+  ],
+  "plot_step_deg": 0.01,
+  "metric_peak_step_deg": 0.1,
+  "normalization": "Each pattern divided by its own maximum full-angle power",
+  "metrics": {
+    "MVDR_standard": {
+      "sinr_db": 20.392378620938008,
+      "nearest_peak_deg": -11.0,
+      "main_error_deg": 0.0,
+      "weight_real": [
+        0.04688198361898729,
+        0.056552051824994946,
+        0.03150142940145249,
+        0.004228845971079165,
+        -0.05176139923027687,
+        -0.1107152435536467,
+        -0.09664669803157656,
+        -0.024831147663089356,
+        0.030791691958523392,
+        0.05290501979188723,
+        0.07274985560295504,
+        0.04573238030456088
+      ],
+      "weight_imag": [
+        -0.0035820337373771707,
+        -0.061838275230311344,
+        -0.07494270195846775,
+        -0.08754694418015929,
+        -0.07997994954725315,
+        -0.028677597377134517,
+        0.06115296808856126,
+        0.09197526235665393,
+        0.0820623073027406,
+        0.06172363819473664,
+        0.04158804346006463,
+        -0.010922488059883762
+      ],
+      "global_peak_on_plot_grid_deg": -11.010000000000005,
+      "gain_at_desired_db_relative_own_peak": -1.7102111310740847e-05,
+      "gain_at_interference_db_relative_own_peak": [
+        -109.38400869849511,
+        -103.73929820293057,
+        -93.3989593123535,
+        -104.97330541563487,
+        -99.95222361752148,
+        -104.07776231553947,
+        -106.65369438039563,
+        -103.60721901561156
+      ]
+    },
+    "ours_optimized": {
+      "sinr_db": 20.375374636285276,
+      "nearest_peak_deg": -11.0,
+      "main_error_deg": 0.0,
+      "weight_real": [
+        0.04486860707402229,
+        0.056578669469304586,
+        0.032567627154671944,
+        0.0032141638232719544,
+        -0.05321310246539833,
+        -0.11117876007318836,
+        -0.0975231383297023,
+        -0.026261789611171902,
+        0.030278281870520726,
+        0.053924359685500474,
+        0.07207333791069515,
+        0.04410857155269987
+      ],
+      "weight_imag": [
+        -0.004540955647826195,
+        -0.05954255206425999,
+        -0.07495641353097052,
+        -0.089027648137262,
+        -0.0798214849405295,
+        -0.027254368955589567,
+        0.059939592999158214,
+        0.09226820762604367,
+        0.08378232885820407,
+        0.06141072952196837,
+        0.03939410244760863,
+        -0.009393939245007043
+      ],
+      "global_peak_on_plot_grid_deg": -11.019999999999996,
+      "gain_at_desired_db_relative_own_peak": -6.219770114241094e-05,
+      "gain_at_interference_db_relative_own_peak": [
+        -79.01184631024702,
+        -69.37463009865189,
+        -74.88916830379077,
+        -78.91879615198276,
+        -68.99727088535529,
+        -114.80625120068669,
+        -78.4577940590013,
+        -87.97202436704929
+      ]
+    },
+    "DNNABF_standard": {
+      "sinr_db": -4.707905575652649,
+      "nearest_peak_deg": -10.599999999999994,
+      "main_error_deg": 0.4000000000000057,
+      "weight_real": [
+        0.05379465967416763,
+        0.06307215988636017,
+        0.02746512182056904,
+        -0.0027655470184981823,
+        -0.054398082196712494,
+        -0.10257212072610855,
+        -0.10189522802829742,
+        -0.05716672167181969,
+        -0.006428276188671589,
+        0.03423803672194481,
+        0.07991727441549301,
+        0.040103934705257416
+      ],
+      "weight_imag": [
+        -0.007830526679754257,
+        -0.03728925436735153,
+        -0.08295366913080215,
+        -0.08950634300708771,
+        -0.06219972297549248,
+        -0.0353795550763607,
+        0.022639892995357513,
+        0.07384707033634186,
+        0.09108883887529373,
+        0.06930636614561081,
+        0.03742454573512077,
+        -0.007844601757824421
+      ],
+      "global_peak_on_plot_grid_deg": -10.649999999999991,
+      "gain_at_desired_db_relative_own_peak": -0.015584001276152209,
+      "gain_at_interference_db_relative_own_peak": [
+        -35.875568614040404,
+        -29.394384119479668,
+        -16.909312696284484,
+        -25.653008431310194,
+        -31.05553056846203,
+        -26.616427945368834,
+        -28.849829514416754,
+        -32.201598149607356
+      ]
+    }
+  },
+  "source_hashes": {
+    "runs/ch3_gpu_deployment_v1/full_test/MVDR_standard.npz": "46f799386e8f71b5e35b286c1cb2a455542f165217d12657efa492bd41cbe5a6",
+    "runs/ch3_gpu_deployment_v1/full_test/ours_optimized.npz": "237eb73d0d9eea97fb6abb4bebeb0c07bc5d4b6e202089b5c2cd2f621278aa9d",
+    "runs/ch3_gpu_deployment_v1/full_test/DNNABF_standard.npz": "6ef969bbad949eca40a1375fa1b7b2760fdaa6bfe9acfb0484dfa66afde9e0d4",
+    "data/ch3_grid_good_v11/test.npz": "a7050d7e2dc4c884e555fb0c36966130354984f61bf926791d637e255dfb92c9",
+    "/home/qyb/RESEARCH/lgd_phd_xu_2025_DartsSearch/plot_ch3_latest_pattern.py": "21acc255336ac900a518389297f253406deab3de05c8f068ea1448124cff99d3"
+  },
+  "pdf_sha256": "8926718e52f6d4fb3930d143d5f54c20fbcd2b0f4ed59ee7f0987b480c75ed3f",
+  "scope": "Illustration of one current good-filtered test scene; not the old thesis fixed-angle figure and not a reproduction of original DNNABF accuracy."
+}

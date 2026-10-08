@@ -1,0 +1,7 @@
+{"method": "population_MVDR", "SINR": 20.374055302392836, "gap": 0.0, "main_MAE": 0.21798333333333328, "null_MAE": 0.0130042727272729, "gates": true}
+{"method": "sample_MVDR", "SINR": 20.327150852806277, "gap": 0.04690444958655706, "main_MAE": 0.2506999999999999, "null_MAE": 0.3400487575757576, "gates": true}
+{"method": "candidate", "SINR": 20.150584769742306, "gap": 0.223470532650529, "main_MAE": 0.21781666666666663, "null_MAE": 0.6228325454545455, "gates": true}
+{"method": "fixed", "SINR": 18.85434849040851, "gap": 1.5197068119843273, "main_MAE": 0.3399833333333331, "null_MAE": 1.930757393939394, "gates": false}
+{"method": "mse", "SINR": 18.548066136327208, "gap": 1.825989166065626, "main_MAE": 0.21539999999999998, "null_MAE": 1.8636539184192982, "gates": false}
+{"method": "random", "SINR": 20.188955007504298, "gap": 0.185100294888537, "main_MAE": 0.21231666666666654, "null_MAE": 0.47041487878787874, "gates": true}
+{"method": "strict_DNNABF", "SINR": -3.0788768098868986, "gap": 23.452932112279736, "main_MAE": 0.3574166666666689, "null_MAE": 7.15576562357726, "gates": false}

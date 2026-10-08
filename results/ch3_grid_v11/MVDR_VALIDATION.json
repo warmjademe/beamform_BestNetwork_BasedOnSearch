@@ -1,0 +1,38 @@
+{
+  "split": "selection_validation",
+  "scenes": 6000,
+  "data_sha256": "d98876fc1a5339a3d77efe26fe8ef363eba389702a70bbdebc49bded92dcd579",
+  "scope": "Oracle-good conditional data, nearest local peak including endpoints, 0.1 degree grid; no neural/test evaluation",
+  "metrics": {
+    "Oracle_MVDR": {
+      "MAE_deg": 0.21798333333333328,
+      "median_deg": 0.20000000000000284,
+      "p95_deg": 0.5,
+      "max_deg": 0.5,
+      "by_K_MAE_deg": {
+        "3": 0.16489999999999977,
+        "4": 0.19240000000000004,
+        "5": 0.2122000000000003,
+        "6": 0.23169999999999963,
+        "7": 0.2521,
+        "8": 0.25459999999999977
+      },
+      "global_peak_MAE_deg": 0.8329333333333332
+    },
+    "sample_MVDR_1024": {
+      "MAE_deg": 0.2506999999999999,
+      "median_deg": 0.20000000000000284,
+      "p95_deg": 0.5999999999999943,
+      "max_deg": 2.3999999999999773,
+      "by_K_MAE_deg": {
+        "3": 0.22139999999999962,
+        "4": 0.23409999999999986,
+        "5": 0.2352000000000003,
+        "6": 0.2566999999999998,
+        "7": 0.27800000000000014,
+        "8": 0.2788
+      },
+      "global_peak_MAE_deg": 0.9183666666666668
+    }
+  }
+}

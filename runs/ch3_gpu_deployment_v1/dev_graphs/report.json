@@ -1,0 +1,106 @@
+{
+  "scope": "development only; frozen weights; same precision",
+  "config": {
+    "scope": "Execution-only optimization of the frozen v11 candidate; no training, new architecture or test-based model selection",
+    "checkpoint": "runs/ch3_grid_v11/candidate/retrain/best.pt",
+    "checkpoint_sha256": "c6b78ba24c8f3e6ac251aa2d1237fa08af2bb43129dca05751d610b4c7626f35",
+    "development_data": "data/ch3_grid_good_v11/selection_validation.npz",
+    "test_data": "data/ch3_grid_good_v11/test.npz",
+    "batch_size": 1,
+    "precision": "FP32 neural core, FP64 phases/covariance/MVDR; no TF32 or quantization",
+    "development": {
+      "scenes_per_k": 10,
+      "passes": 10,
+      "warmup": 50,
+      "seed": 2026100901
+    },
+    "confirmation": {
+      "scenes_per_k": 20,
+      "passes": 20,
+      "rounds": 3,
+      "warmup": 100,
+      "seed": 2026100902
+    },
+    "parity": {
+      "network_max_abs_weight_difference": 2e-06,
+      "mvdr_max_abs_weight_difference": 1e-09,
+      "max_abs_sinr_difference_db": 0.001,
+      "max_abs_main_error_difference_deg": 0.1000001
+    },
+    "primary_timing": "Fresh GPU-resident AOA and mask through complete weight output, includes graph input copies; CUDA synchronized before/after each batch-one call",
+    "supplemental_timing": "Same AOA/mask provided on CPU and complex weights returned to CPU, including transfers",
+    "fairness": "Optimize and time both NN and MVDR; consider graph solve_ex, graph Cholesky and graph inverse; preserve original eager references. Report fastest verified measured MVDR implementation.",
+    "setup": "Graph capture/compilation and model loading excluded from steady-state latency, recorded separately",
+    "test_role": "Existing 12000-scene holdout is reused only for deployment numerical/metric regression after implementation selection on development data"
+  },
+  "source_hashes": {
+    "/home/qyb/RESEARCH/lgd_phd_xu_2025_DartsSearch/probe_ch3_gpu_deployment.py": "28f958fe4fe2653581c073384e69527d96199a173f7f9cf65d083b9641383fcb",
+    "beamnas/gpu_runtime.py": "b51b0afce5276b2ae365288f884c0f735396533a139a529754c95e17adb0aea6",
+    "configs/ch3_gpu_deployment_v1.json": "44bf6d4a8f1301bd4fff565e17718980b9d5e237f803d064ad47981d6c830c7b"
+  },
+  "torch": "2.8.0+cu128",
+  "GPU": "NVIDIA GeForce RTX 4090",
+  "setup": {
+    "NN_graph": 0.05082709714770317,
+    "MVDR_solve_graph": 0.047145090997219086,
+    "MVDR_cholesky_graph": 0.05670065991580486,
+    "MVDR_inverse_graph": 0.053171281702816486
+  },
+  "parity": {
+    "NN_graph": {
+      "max_abs_weight_difference": 0.0,
+      "solver_info_all_zero": null
+    },
+    "MVDR_solve_graph": {
+      "max_abs_weight_difference": 0.0,
+      "solver_info_all_zero": true
+    },
+    "MVDR_cholesky_graph": {
+      "max_abs_weight_difference": 2.2592879015669964e-13,
+      "solver_info_all_zero": true
+    },
+    "MVDR_inverse_graph": {
+      "max_abs_weight_difference": 1.6215647236764535e-15,
+      "solver_info_all_zero": true
+    }
+  },
+  "errors": {},
+  "timing": {
+    "NN_eager": {
+      "mean_ms": 1.2131038366666667,
+      "median_ms": 1.2031235,
+      "p95_ms": 1.4242159499999998,
+      "n": 600
+    },
+    "MVDR_eager": {
+      "mean_ms": 0.6109451933333333,
+      "median_ms": 0.601442,
+      "p95_ms": 0.7466953999999999,
+      "n": 600
+    },
+    "NN_graph": {
+      "mean_ms": 0.12780642999999997,
+      "median_ms": 0.1260945,
+      "p95_ms": 0.13942854999999996,
+      "n": 600
+    },
+    "MVDR_solve_graph": {
+      "mean_ms": 0.11650554166666666,
+      "median_ms": 0.114468,
+      "p95_ms": 0.13045275,
+      "n": 600
+    },
+    "MVDR_cholesky_graph": {
+      "mean_ms": 0.13099489666666667,
+      "median_ms": 0.1286805,
+      "p95_ms": 0.14486425,
+      "n": 600
+    },
+    "MVDR_inverse_graph": {
+      "mean_ms": 0.12619390833333333,
+      "median_ms": 0.124327,
+      "p95_ms": 0.139188,
+      "n": 600
+    }
+  }
+}

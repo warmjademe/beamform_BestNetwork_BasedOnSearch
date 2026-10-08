@@ -1,0 +1,18 @@
+{
+  "scope": "Execution-only optimization of the frozen v11 candidate; no training, new architecture or test-based model selection",
+  "checkpoint": "runs/ch3_grid_v11/candidate/retrain/best.pt",
+  "checkpoint_sha256": "c6b78ba24c8f3e6ac251aa2d1237fa08af2bb43129dca05751d610b4c7626f35",
+  "development_data": "data/ch3_grid_good_v11/selection_validation.npz",
+  "test_data": "data/ch3_grid_good_v11/test.npz",
+  "batch_size": 1,
+  "precision": "FP32 neural core, FP64 phases/covariance/MVDR; no TF32 or quantization",
+  "development": {"scenes_per_k": 10, "passes": 10, "warmup": 50, "seed": 2026100901},
+  "confirmation": {"all_test_scenes": 12000, "rounds": 5, "warmup": 100, "seed": 2026100902},
+  "parity": {"network_max_abs_weight_difference": 0.000002, "mvdr_max_abs_weight_difference": 0.000000001, "max_abs_sinr_difference_db": 0.001, "max_abs_main_error_difference_deg": 0.1000001},
+  "primary_timing": "User-requested total time for all 12000 test scenes processed sequentially at batch size 1, divided by 12000. CUDA synchronize at whole-loop boundaries. Includes fresh graph input copies and storage of every output weight; GPU inputs resident.",
+  "supplemental_timing": "Same AOA/mask provided on CPU and complex weights returned to CPU, including transfers",
+  "primary_comparison": "Latest user instruction: optimize our network; standard MVDR closed-form covariance/solve/normalize and standard original-form DNNABF forward are primary references. Report implementation asymmetry explicitly.",
+  "supplemental_comparison": "Previously tested graph solve_ex, graph Cholesky, graph inverse and compiled graph MVDR are retained as supplemental optimized references. No deliberate slowing or recomputation of irrelevant work in standard references.",
+  "setup": "Graph capture/compilation and model loading excluded from steady-state latency, recorded separately",
+  "test_role": "Existing 12000-scene holdout is reused only for deployment numerical/metric regression after implementation selection on development data"
+}

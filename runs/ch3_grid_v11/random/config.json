@@ -1,0 +1,278 @@
+{
+  "arguments": {
+    "out": "runs/ch3_grid_v11/random",
+    "data": "data/ch3_grid_good_v11",
+    "task": "random",
+    "reference_search": "runs/ch3_grid_v11/candidate",
+    "protocol": "configs/ch3_grid_v11.json",
+    "smoke": false,
+    "family": "dense",
+    "seed": 117,
+    "batch_size": 512,
+    "search_epochs": 60,
+    "warmup_epochs": 5,
+    "retrain_epochs": 320,
+    "selection_metric": "mean_sinr_gap_db"
+  },
+  "space": {
+    "width": 384,
+    "max_depth": 16,
+    "depths": [
+      2,
+      4,
+      6,
+      8,
+      12,
+      16
+    ],
+    "ff_multipliers": [
+      1,
+      2,
+      4
+    ]
+  },
+  "genotype": {
+    "depth": 8,
+    "layers": [
+      {
+        "ff": 2,
+        "long_skip": "none",
+        "activation": "silu",
+        "skip": "identity"
+      },
+      {
+        "ff": 1,
+        "long_skip": "input",
+        "activation": "tanh",
+        "skip": "linear"
+      },
+      {
+        "ff": 2,
+        "long_skip": "none",
+        "activation": "silu",
+        "skip": "identity"
+      },
+      {
+        "ff": 1,
+        "long_skip": "input",
+        "activation": "silu",
+        "skip": "identity"
+      },
+      {
+        "ff": 2,
+        "long_skip": "input",
+        "activation": "tanh",
+        "skip": "linear"
+      },
+      {
+        "ff": 1,
+        "long_skip": "none",
+        "activation": "gelu",
+        "skip": "linear"
+      },
+      {
+        "ff": 2,
+        "long_skip": "input",
+        "activation": "silu",
+        "skip": "identity"
+      },
+      {
+        "ff": 4,
+        "long_skip": "two_back",
+        "activation": "silu",
+        "skip": "identity"
+      }
+    ],
+    "selection": "one_random_draw_before_training",
+    "architecture_seed": 9117
+  },
+  "protocol": {
+    "id": "chapter3_structured_grid_good_only_v11",
+    "optimizer": {
+      "name": "AdamW",
+      "lr": 0.001,
+      "weight_decay": 1e-05,
+      "cosine_min_lr": 1e-05,
+      "gradient_clip": 5
+    },
+    "data": {
+      "antennas": 12,
+      "spacing_wavelengths": 0.5,
+      "snr_db": 10,
+      "inr_db": 30,
+      "noise_variance": 1,
+      "snapshots": 1024,
+      "steering": "positive_phase_unit_element_magnitude"
+    },
+    "module_changes": {
+      "input": "AOA-only interface followed by positive relative spatial phase features, role and validity masks",
+      "output": "unbounded linear head followed by centrohermitian and distortionless projection; no tanh bound on final weights",
+      "supervision": "offline population MVDR",
+      "loss": "restored_physical_objective",
+      "inference": "no covariance inputs, inverse, solve, eigendecomposition or teacher correction"
+    },
+    "scope": "Reference-qualified, separated-angle reconstruction. Report eligibility counts. It does not reproduce the unspecified historical random-AOA distribution; no claim of unrestricted performance or DARTS superiority without matched evidence."
+  },
+  "experiment_protocol": {
+    "id": "chapter3_structured_grid_good_only_v11",
+    "paper_scene": {
+      "desired_deg": 18,
+      "interference_deg": [
+        -32,
+        -20,
+        -14,
+        -4,
+        7,
+        25,
+        36,
+        58
+      ]
+    },
+    "generation": {
+      "rule": "Deterministic combinatorial enumeration on the published integer-degree angular grid, with declared separations derived from the published example. This is a new reconstruction, not recovered historical data generation code.",
+      "angle_min_deg": -90,
+      "angle_max_deg": 90,
+      "step_deg": 1,
+      "minimum_desired_interference_separation_deg": 7,
+      "minimum_any_source_separation_deg": 6,
+      "interferers": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "ordering": "Cycle desired angles and K; use a coprime stride through lexicographic combination ranks. Interferer spacing is enforced by compressed-index unranking. No random AOA draws.",
+      "counts": {
+        "train": 60000,
+        "architecture_validation": 12000,
+        "selection_validation": 6000,
+        "test": 12000
+      },
+      "split_group": "desired angle; all scenes at the same desired angle stay in the same split",
+      "split_residues_mod_10": {
+        "train": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "architecture_validation": [
+          6,
+          7
+        ],
+        "selection_validation": [
+          8
+        ],
+        "test": [
+          9
+        ]
+      },
+      "exclude_prior_neural_and_diagnostic_scenes": true,
+      "bad_fraction": 0,
+      "candidate_batch_size": 8192,
+      "maximum_candidates": 3000000,
+      "ordering_seed": 2026100841,
+      "snapshot_seed": 2026100842
+    },
+    "physics": {
+      "antennas": 12,
+      "spacing_wavelengths": 0.5,
+      "snr_db": 10,
+      "inr_db": 30,
+      "noise_variance": 1,
+      "snapshots": 1024,
+      "steering": "positive_phase_unit_element_magnitude"
+    },
+    "quality": {
+      "reference": "population interference-plus-noise MVDR evaluated before neural training",
+      "main_error_deg_max": 0.5,
+      "null_mean_error_deg_max": 0.1,
+      "sinr_db_min": 10,
+      "main_rule": "Nearest local power peak including one-sided endpoint maxima on a 0.1-degree scan; endpoint compared to adjacent scan sample.",
+      "null_rule": "One-to-one minimum-total-distance matching to interior minima on a 0.001-degree scan, with analytic derivative verification; missing minima fail.",
+      "scope": "Apply identical Oracle-only eligibility to all splits. Retain rejection records; no filtering on neural results. Nulls need not be computed for scenes already rejected by main error or SINR; mark these as not evaluated."
+    },
+    "search": {
+      "family": "dense",
+      "width": 384,
+      "max_depth": 16,
+      "depths": [
+        2,
+        4,
+        6,
+        8,
+        12,
+        16
+      ],
+      "ff_multipliers": [
+        1,
+        2,
+        4
+      ],
+      "epochs": 60,
+      "warmup_epochs": 5,
+      "batch_size": 512,
+      "seed": 117,
+      "architecture_lr": 0.0003,
+      "alternation": "one weight step and one architecture-validation step after warmup"
+    },
+    "training": {
+      "epochs": 320,
+      "batch_size": 512,
+      "seed": 117,
+      "from_scratch": true,
+      "checkpoint_selection": "minimum selection-validation mean SINR gap",
+      "optimizer": {
+        "name": "AdamW",
+        "lr": 0.001,
+        "weight_decay": 1e-05,
+        "cosine_min_lr": 1e-05,
+        "gradient_clip": 5
+      },
+      "loss": "restored physical objective; matched population-component-MSE control"
+    },
+    "controls": [
+      "fixed DNNABF hidden widths with identical added input/output modules and physical loss",
+      "same searched genotype with population-component MSE",
+      "one predeclared random architecture with physical loss"
+    ],
+    "acceptance": {
+      "mean_gap_db_max": 0.5,
+      "each_k_mean_gap_db_max": 1.0,
+      "p95_gap_db_max": 3.0,
+      "main_MAE_difference_vs_population_MVDR_max_deg": 0.1
+    },
+    "test_policy": "Freeze all model checkpoints and evaluator sources before any neural test prediction. The Oracle-filtered test is generated with the dataset; no training or selection reads its file. Include all frozen controls and every test scene.",
+    "metrics": [
+      "SINR overall and by K",
+      "nearest-local-peak absolute direction error",
+      "global-peak error",
+      "paired NN-versus-Oracle peak difference",
+      "null errors and missing minima",
+      "component MSE and NMSE",
+      "model architecture and parameters",
+      "search/retrain costs",
+      "matched CPU/GPU batch-one latency"
+    ],
+    "latency": {
+      "devices": [
+        "cpu",
+        "cuda"
+      ],
+      "cpu_threads": 4,
+      "batch_size": 1,
+      "scenes_per_k": 10,
+      "passes": 10,
+      "warmup_calls_per_method": 50,
+      "order_seed": 2026100843
+    },
+    "scope_note": "Reference-qualified, separated-angle reconstruction. Report eligibility counts. It does not reproduce the unspecified historical random-AOA distribution; no claim of unrestricted performance or DARTS superiority without matched evidence."
+  },
+  "loss": "restored_physical_objective",
+  "data_manifest_sha256": "2e04f62e0210a95c7d68442fddb87496b553a2c346de3a69517c07d30f1a43ae",
+  "test_accessed": false
+}

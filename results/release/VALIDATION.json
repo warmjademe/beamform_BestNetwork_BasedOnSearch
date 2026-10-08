@@ -49,6 +49,8 @@
       "mean_sinr_db": -2.6278330089525075
     }
   },
-  "publication_files_hashed": 484,
-  "scope": "Artifact integrity and frozen prediction replay; no retraining or new selection"
+  "publication_files_hashed": 487,
+  "scope": "Artifact integrity and frozen prediction replay; no retraining or new selection",
+  "interference_gain_full_test_consistency": true,
+  "publication_hash_scope": "Full CUDA prediction replay completed before supplementary gain analysis; all current manifest files separately SHA256 checked"
 }

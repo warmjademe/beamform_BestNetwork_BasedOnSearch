@@ -21,8 +21,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 8250,
-      "sha256": "969f55aa95d09dfb7a0344beac5791350f310c47b26daed03243b9d52638bcd0"
+      "bytes": 8802,
+      "sha256": "61db0e58bcb6d22a12855d7f498c86e060aed29adaf87527aeb992de253d3cd4"
     },
     {
       "path": "audit_ch3_gpu_timing.py",
@@ -635,6 +635,11 @@
       "sha256": "1515b886d2cee2a43045459cf4c068644a502d895c00272a74a8b5e82126fc6a"
     },
     {
+      "path": "evaluate_interference_gain.py",
+      "bytes": 3603,
+      "sha256": "8d70c06812748ae7296d9517f423cb1126403c58e87011e812f103676a302e31"
+    },
+    {
       "path": "evaluate_restored_holdout.py",
       "bytes": 10244,
       "sha256": "c408ca456f28c07d27f338f92a5ac388e4e2cc9e71323352d51c6c194be16a7f"
@@ -788,6 +793,16 @@
       "path": "results/ch3_grid_v11/PAPER_TARGETS.json",
       "bytes": 1877,
       "sha256": "b21afc23cf8afeb02d9182920f281fea363cfec5067224bf3a096c91e2239356"
+    },
+    {
+      "path": "results/interference_gain/REPORT.json",
+      "bytes": 9065,
+      "sha256": "6d79cbd1df60f942a1434548b6813c01a4be5ae3de55e206cc275d4b08e0154d"
+    },
+    {
+      "path": "results/interference_gain/per_direction.npz",
+      "bytes": 1679481,
+      "sha256": "a0bc52f04765bf30b062aa2a80dc050f875e484da352e129a45a3f1b37925f67"
     },
     {
       "path": "run_ch3_completion.py",
@@ -2429,5 +2444,6 @@
       "bytes": 3755,
       "sha256": "ed1edf71fd59e1053c88e1ba97b050af180eec7cef33c86c5dbedff06c3b886c"
     }
-  ]
+  ],
+  "updated_at": "2026-10-08T13:27:07.287189+08:00"
 }

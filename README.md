@@ -67,6 +67,12 @@ python evaluate_ch3_reconstruction.py --out runs/rechecked_test --runs runs/ch3_
 
 全部方法、逐 K 指标、缺失零陷和原始预测见 [FINAL.json](results/ch3_grid_v11/FINAL.json) 与 `runs/ch3_grid_v11/test/`。DNNABF 的零陷均值仅计已匹配方向，其 52 个未匹配方向另有记录。结果支持所选网络的平均 SINR 和主瓣误差接近 MVDR；零陷位置误差较大。随机结构对照的 SINR 略高，当前结果不支持 DARTS 优于随机搜索的精度结论。DNNABF 行表示本仓库所记录配置下的测量结果。
 
+实际干扰方向响应另见 [INTERFERENCE GAIN](results/interference_gain/REPORT.json)。在全部 66000 个干扰方向上，以期望方向响应为 0 dB，本方法的干扰增益中位数为 -71.82 dB，第 95 百分位数为 -56.32 dB，99.30% 的方向达到至少 40 dB 衰减；最差单方向为 -16.58 dB。该统计直接使用真实干扰 AOA，不以最近零陷位置代替；逐方向原始功率比保存在同目录 `per_direction.npz`。
+
+```bash
+python evaluate_interference_gain.py --out results/rechecked_interference_gain
+```
+
 ## GPU 计算时间
 
 `benchmark_ch3_full_test_runtime.py` 在整个测试集上逐条推理（batch=1），保存每个复权值输出，整组计时后除以 12000，重复 5 轮。主比较按实验要求优化本方法，MVDR 与 DNNABF 使用标准实现；额外保留同样进行编译/CUDA Graph 优化的 MVDR 对照。

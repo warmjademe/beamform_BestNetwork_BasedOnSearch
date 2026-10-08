@@ -102,7 +102,10 @@ python benchmark_ch3_full_test_runtime.py --out runs/rechecked_runtime
 ```bash
 python plot_ch3_latest_pattern.py --selection first --out output/pdf/replotted_first
 python plot_ch3_latest_pattern.py --selection showcase --out output/pdf/replotted_showcase
+python plot_ch3_paper_pattern.py
 ```
+
+论文使用的紧凑排版方向图位于 `output/pdf/ch3_paper_pattern/`，直接读取已保存的展示场景曲线，未重新选择场景；其筛选标准在论文正文、原 `SCENE.json` 与该目录 `PROVENANCE.json` 中记录。
 
 ## 文件说明
 

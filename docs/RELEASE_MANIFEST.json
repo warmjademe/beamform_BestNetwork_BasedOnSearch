@@ -16,13 +16,13 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 208,
-      "sha256": "eadb81aeb48ef342d29893f39eac2956bcba6a45bb4e6b21d5dc121b598e243c"
+      "bytes": 239,
+      "sha256": "a6b56fd2a54a19d9ebfe16dea702b2d9b4f75a26b12f18df8cbb987eb5a08442"
     },
     {
       "path": "README.md",
-      "bytes": 8802,
-      "sha256": "61db0e58bcb6d22a12855d7f498c86e060aed29adaf87527aeb992de253d3cd4"
+      "bytes": 9076,
+      "sha256": "767be83aebacd55a9d1acb1880a02322fc55b10ce4f34c92be959cfe2217da1a"
     },
     {
       "path": "audit_ch3_gpu_timing.py",
@@ -675,6 +675,21 @@
       "sha256": "27a058b6f950a01bc01e4eddd3885542cfce0f7cecc0b83cb3ad3936745525da"
     },
     {
+      "path": "output/pdf/ch3_paper_pattern/PROVENANCE.json",
+      "bytes": 1989,
+      "sha256": "0c9d357f0c5b1a31dac79327d34197452bb5cabf3ea4306aa5bcf6253f4b58eb"
+    },
+    {
+      "path": "output/pdf/ch3_paper_pattern/ch3_selected_eight_interferers.pdf",
+      "bytes": 33747,
+      "sha256": "f1044028144759800af8dbe624064d19e5c2db26451a0d3c2458be65e4e7c89d"
+    },
+    {
+      "path": "output/pdf/ch3_paper_pattern/ch3_selected_eight_interferers.png",
+      "bytes": 174053,
+      "sha256": "a9795e862b2fe8da0f092524f8b6512bf97e1a8e154fcabb184d9273f0ce3c25"
+    },
+    {
       "path": "output/pdf/ch3_selected_pattern/SCENE.json",
       "bytes": 6786,
       "sha256": "955dcfc4937591b3397994ec9c8af91298dcce5b737f450984ea24a820de16ac"
@@ -703,6 +718,11 @@
       "path": "plot_ch3_latest_pattern.py",
       "bytes": 9128,
       "sha256": "21acc255336ac900a518389297f253406deab3de05c8f068ea1448124cff99d3"
+    },
+    {
+      "path": "plot_ch3_paper_pattern.py",
+      "bytes": 3267,
+      "sha256": "7ca4462814b7ab3440c858970c67726b93bde24d5b5ebe1245cbdaf40869fbe0"
     },
     {
       "path": "predict_ch3_gpu.py",
@@ -2445,5 +2465,5 @@
       "sha256": "ed1edf71fd59e1053c88e1ba97b050af180eec7cef33c86c5dbedff06c3b886c"
     }
   ],
-  "updated_at": "2026-10-08T13:27:07.287189+08:00"
+  "updated_at": "2026-10-08T13:34:55.872103+08:00"
 }

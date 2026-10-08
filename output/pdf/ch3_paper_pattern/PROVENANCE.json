@@ -1,0 +1,67 @@
+{
+  "test_index": 1110,
+  "selection_rule": {
+    "mode": "post_test_showcase_selected_at_user_request",
+    "test_scenes": 12000,
+    "K8_scenes": 2000,
+    "eligible_scenes": 523,
+    "eligibility": {
+      "interferers": 8,
+      "abs_desired_AOA_max_deg": 60,
+      "ours_main_error_max_deg": 0.1,
+      "ours_main_error_not_greater_than": [
+        "MVDR",
+        "DNNABF reconstruction"
+      ]
+    },
+    "ranking": "Smallest MVDR-minus-ours SINR gap; tie broken by original test index",
+    "top_candidates": [
+      {
+        "test_index": 1110,
+        "sinr_gap_db": 0.01700398465272457
+      },
+      {
+        "test_index": 4804,
+        "sinr_gap_db": 0.02074704127982585
+      },
+      {
+        "test_index": 7630,
+        "sinr_gap_db": 0.02214967763265463
+      },
+      {
+        "test_index": 3348,
+        "sinr_gap_db": 0.022506041044131564
+      },
+      {
+        "test_index": 9122,
+        "sinr_gap_db": 0.02515129048452991
+      },
+      {
+        "test_index": 460,
+        "sinr_gap_db": 0.02697625091453304
+      },
+      {
+        "test_index": 9892,
+        "sinr_gap_db": 0.02708591976491448
+      },
+      {
+        "test_index": 3689,
+        "sinr_gap_db": 0.02752626379111689
+      },
+      {
+        "test_index": 726,
+        "sinr_gap_db": 0.029330642662372952
+      },
+      {
+        "test_index": 11560,
+        "sinr_gap_db": 0.029448851132244158
+      }
+    ],
+    "interpretation": "Selected favorable illustration, not representative sampling or independent evidence of overall performance; aggregate test results unchanged."
+  },
+  "normalization": "Each pattern divided by its own maximum full-angle power",
+  "scope": "Presentation only; original arrays unchanged",
+  "source_array_sha256": "fb7f486461be3ae110e6a21677ed96db7b44549deb50d5f161c9b0542c8b4175",
+  "source_scene_sha256": "955dcfc4937591b3397994ec9c8af91298dcce5b737f450984ea24a820de16ac",
+  "pdf_sha256": "f1044028144759800af8dbe624064d19e5c2db26451a0d3c2458be65e4e7c89d"
+}

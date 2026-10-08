@@ -10,4 +10,5 @@ runs/*
 output/pdf/*
 !output/pdf/ch3_latest_pattern/
 !output/pdf/ch3_selected_pattern/
+!output/pdf/ch3_paper_pattern/
 tmp/
